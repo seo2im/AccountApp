@@ -4,14 +4,13 @@ import {
 } from 'react-native';
 
 import { ContextProvider } from "~/Context"
+import Navigator from "~/Screens/Navigator"
 
 /* const App: () => React$Node = () => { */
 const App = () => {
   return (
     <ContextProvider>
-      <View>
-
-      </View>
+      <Navigator />
     </ContextProvider>
   )
 };
