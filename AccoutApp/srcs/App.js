@@ -3,15 +3,17 @@ import {
   View
 } from 'react-native';
 
+import { ContextProvider } from "~/Context"
 
 /* const App: () => React$Node = () => { */
 const App = () => {
   return (
-    <View>
+    <ContextProvider>
+      <View>
 
-    </View>
+      </View>
+    </ContextProvider>
   )
 };
-
 
 export default App;
