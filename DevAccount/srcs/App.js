@@ -12,17 +12,16 @@ import {
   Text,
 } from 'react-native';
 
-import styled from 'styled-components'
-import New from './New'
-import New2 from './New2'
+
+
+import { ContextProvider} from "./Context/Context"
+import Navigator from "./Screens/Navigator"
 
 const App =  () => {
   return (
-    <>
-      <Text>HEEEEEEE</Text>
-      <New />
-      <New2 />
-    </>
+    <ContextProvider >
+      <Navigator />
+    </ContextProvider>
   );
 };
 
