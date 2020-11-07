@@ -45,11 +45,41 @@ function ContextProvider ({ children }) {
 	}
 
 	const testInitData = () => {
-		
+		setAccount(5000);
+		setIncome({total : 912000, details : [{name : "Education", value : 912000}]})
+		setFixedExpense({total : 422650,
+						details : [{name : "생활비", value : 150000},
+									{name : "할부", value : 140000},
+									{name : "Adobe", value : 23100},
+									{name : "Phone" , value : 89550},
+									{name : "청약", value : 20000}]})
+		setMustExpense({assignTotal : 96000, useTotal : 20000,
+					lists : [{
+						name : "Coffee",
+						assignTotal : 65600,
+						byCost : 4100,
+						count : 16,
+						useTotal : 20000,
+						details : [{name : "StarBucks", date : "20201105", value : 10000},
+									{name : "StarBucks", date : "20201101", value : 10000}],
+						balance : 45600
+					},{
+						name : "교통",
+						assignTotal : 26400,
+						byCost : 3300,
+						count : 8,
+						useTotal : 10000,
+						details : [{name : "Card", date : "20201101", value : 10000}],
+						balance : 16400
+					}]});
+		setSurplus({assignTotal : 393350, useTotal : 10000,
+						details : [{name : "jam", date : "20201108", value : 2000},
+									{name : "jam2", date : "20201106", value : 4000},
+									{name : "jam3", date : "20201102", value : 4000}]})
 	}
 
 	useEffect(() => {
-		initData();
+		testInitData();
 	}, []);
 
 	return (

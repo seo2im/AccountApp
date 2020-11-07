@@ -1,12 +1,26 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { useContext } from 'react'
+import { View, Text, Button, FlatList } from 'react-native'
 
-function MustExpenseDetail () {
+import { Context } from '../Context/Context'
+
+function MustExpense ({navigation}) {
+	const { lists } = useContext(Context).mustExpense;
+
 	return (
 		<View>
-			<Text>MustExpenseDetail</Text>
+			<FlatList
+				data={lists}
+				keyExtractor={(item, index) => (`${index}_${item.name}`)}
+				ListEmptyContent={<Text>No Item</Text>}
+				renderItem={({item, index}) => (
+					<View>
+						<Button title={`${item.name} ${item.assignTotal} ${item.useTotal}`} onPress={() => navigation.navigate('MustExpenseDetail', { item })} />
+					</View>
+				)}
+			/>
+			
 		</View>
 	)
 }
 
-export default MustExpenseDetail;
+export default MustExpense;
