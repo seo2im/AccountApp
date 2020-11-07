@@ -3,15 +3,15 @@ import {
   View
 } from 'react-native';
 
-import { ContextProvider } from "~/Context"
-import Navigator from "~/Screens/Navigator"
+//import { ContextProvider } from "./Context/index"
+//import Navigator from "./Screens/Navigator"
 
 /* const App: () => React$Node = () => { */
 const App = () => {
   return (
-    <ContextProvider>
-      <Navigator />
-    </ContextProvider>
+    <View>
+      <Text>Hi</Text>
+    </View>
   )
 };
 

@@ -44,6 +44,10 @@ function ContextProvider ({ children }) {
 		await getData('surplus', setSurplus);
 	}
 
+	const testInitData = () => {
+		
+	}
+
 	useEffect(() => {
 		initData();
 	}, []);
