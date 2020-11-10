@@ -8,7 +8,20 @@ import MustExpense from "./MustExpense"
 import MustExpenseDetail from "./MustExpenseDetail"
 import Surplus from "./Surplus"
 
+import Income from "./Income"
+import IncomeEditor from "../Editor/IncomeEditor"
+
 const Stack = createStackNavigator();
+
+function IncomeStack ({route}) {
+	
+	return (
+		<Stack.Navigator>
+			<Stack.Screen name="Income" component={Income} />
+			<Stack.Screen name="IncomeEditor" component={IncomeEditor} />
+		</Stack.Navigator>
+	)
+}
 
 function ExStack ({route}) {
 	const name = route.params;
@@ -28,8 +41,7 @@ function Navigator () {
 		<NavigationContainer>
 			<Stack.Navigator>
 				<Stack.Screen name="Main" component={MainView} />
-				<Stack.Screen name="Surplus" component={Surplus} />
-				<Stack.Screen name="ExStack" component={ExStack} />
+				<Stack.Screen name="IncomeStack" component={IncomeStack} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	)

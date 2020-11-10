@@ -3,14 +3,6 @@ import { View, Text, Button, FlatList } from 'react-native'
 
 import { Context } from '../Context/Context'
 
-import AccountSetter from '../Setter/AccountSetter'
-import IncomeSetter from '../Setter/IncomeSetter'
-import FixedExpenseSetter from '../Setter/FixedExpenseSetter'
-import SurplusSetter from '../Setter/SurplusSetter'
-import { ChangeMustExpense, UseMustExpense } from '../Setter/MustExpenseSetter'
-
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
 function MainView ({navigation}) {
 	const {
 		account,
@@ -21,11 +13,20 @@ function MainView ({navigation}) {
 	} = useContext(Context)
 
 	return (
-		<KeyboardAwareScrollView>
 		<View>
 			<Text>Account : {account}</Text>
-			<Text>Income : {income.total}</Text>
-			<Text>fixedExpense : {fixedExpense.total}</Text>
+			<Text onPress={() => navigation.navigate("IncomeStack")}>
+				Income : {income.total}
+			</Text>
+			
+		</View>
+	)
+}
+
+export default MainView;
+
+/*
+<Text>fixedExpense : {fixedExpense.total}</Text>
 			<Text onPress={() => navigation.navigate('Surplus')}>
 				Surplus : {surplus.assignTotal} - {surplus.useTotal} = {surplus.assignTotal - surplus.useTotal}
 			</Text>
@@ -41,13 +42,5 @@ function MainView ({navigation}) {
 					</View>
 				)}
 			/>
-			
-			<ChangeMustExpense />
-			<UseMustExpense />
-		</View>
-		</KeyboardAwareScrollView>
-	)
-}
-
-export default MainView;
+*/
 

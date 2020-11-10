@@ -3,8 +3,6 @@ import { View, Text, FlatList } from 'react-native'
 
 function MustExpenseDetail ({route}) {
 	const { name, assignTotal, useTotal, details } = route.params.item;
-	
-	console.log(route.params)
 
 	return (
 		<View>
