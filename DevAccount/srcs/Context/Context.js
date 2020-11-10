@@ -17,7 +17,7 @@ import useMustExpense from './useMustExpense'
 		byCost : number,
 		count : number,
 		useTotal : number,
-		details : { name : string, date : date, value : number },
+		details : [{ name : string, date : date, value : number }],
 		balance : number
 	}]
 
@@ -35,7 +35,7 @@ function ContextProvider ({ children }) {
 	const [ income, addIncome, modIncome ] = useIncome();
 	const [ fixedExpense, addFixedExpense, modFixedExpense] = useFixedExpense();
 	const [ surplus, changeSurplusAssign, addSurplus, modSurplus ] = useSurplus();
-	const [ mustExpense ] = useMustExpense();
+	const [ mustExpense, addMustExpense, modMustExpense ] = useMustExpense();
 
 	return (
 		<Context.Provider value={{
@@ -43,7 +43,7 @@ function ContextProvider ({ children }) {
 			income, addIncome, modIncome,
 			fixedExpense, addFixedExpense, modFixedExpense,
 			surplus, changeSurplusAssign, addSurplus, modSurplus,
-			mustExpense 
+			mustExpense, addMustExpense, modMustExpense 
 		}}>
 			{children}
 		</Context.Provider>

@@ -30,24 +30,40 @@ function useMustExpense () {
 	}
 
 	useEffect(() => testInitMustExpense(), []);
+
+	const addMustExpense = ({name, byCost, count}, callback) => {
+		const lists = [...mustExpense.lists, { name, byCost, count, assignTotal : byCost * count, useTotal : 0, details : [], balance : byCost * count}]
+		setMustExpense({...setMustExpense, lists : lists});
+		callback(); //changeSurplusAssign
+	}
+
+	const modMustExpense = ({name, byCost, count}, callback) => {
+		const lists = mustExpense.lists.map(e => {
+			if (e.name === name)
+				return {...e, byCost : byCost, count : count, assignTotal : byCost * count, balance : byCost * count - e.useTotal}
+			else
+				return e;
+		})
+		const assignTotal = mustExpense.lists.reduce((acc, cur) => acc + cur.useTotal, 0);
+		setMustExpense({...mustExpense, assignTotal : assignTotal, lists : lists});
+		callback(); //chagneSurplusAssign
+	}
+
+	const addMustExpenseItem = () => {
+
+	}
+
+	const modMustExpenseItem = () => {
+		
+	}
+
 /*
 	const modMustExpense = (mode, detail) => {
 		const { kind, ...data } = detail
 
 		switch (mode) {
 			case "CHANGE" :				
-				const {byCost, count} = data;
-				let diff = mustExpense.lists.find(e => e.name === kind).assignTotal;
-				const changedList = mustExpense.lists.map(e => {
-					if (e.name === kind) {
-						return {...e, byCost : byCost, count : count, assignTotal : byCost * count, balance : byCost * count - e.useTotal}
-					}
-					else
-						return e;
-				})
-				diff -= changedList.find(e => e.name === kind).assignTotal;
-				setMustExpense({...mustExpense, assignTotal : mustExpense.assignTotal - diff, lists : changedList});
-				modSurplus("CHANGE", {value : diff})
+				
 				break;
 			case "USE" :
 				const {name, date, value} = data;
@@ -65,7 +81,7 @@ function useMustExpense () {
 	}
 */
 
-	return [mustExpense];
+	return [mustExpense, addMustExpense, modMustExpense];
 }
 
 export default useMustExpense;

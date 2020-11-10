@@ -3,21 +3,22 @@ import { View, Text, Button, TextInput } from 'react-native'
 
 import { Context } from '../Context/Context'
 
-function IncomeEditor ({route, navigation}) {
+function SurplusEditor ({route, navigation}) {
 	const {
-		income,
-		addIncome,
-		modIncome,
-		changeSurplusAssign
+		surplus,
+		addSurplus,
+		modSurplus
 	} = useContext(Context);
 
 	const isEdit = route.params.name ? true : false;
 	let name = isEdit ? route.params.name : "";
-	let value = isEdit ? income.details.find(e => e.name === name).value : 0;
+	let value = isEdit ? surplus.details.find(e => e.name === name).value : 0;
+	const time = new Date();
+	let date = isEdit ? surplus.details.find(e => e.name === name).date : `${time.getFullYear()}-${time.getMonth()}-${time.getDate()}`;
 
 	return (
 		<View>
-			<Text>Income : {income.total}</Text>
+			<Text>surplus : {surplus.useTotal}</Text>
 			{isEdit ? <Text>{name}</Text>
 			: <TextInput
 				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
@@ -28,15 +29,15 @@ function IncomeEditor ({route, navigation}) {
 				  style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
 				  keyboardType='number-pad'
       			onChangeText={text => {value = Number(text)}}
-      			value={value}
+      			value={0}
     		/>
-			<Button title="setIncome" onPress={()=> {
-				isEdit ? modIncome({name, value}, () => changeSurplusAssign(50000))
-						: addIncome({name, value}, () => changeSurplusAssign(50000));
+			<Button title="SetSurplus" onPress={()=> {
+				isEdit ? modSurplus({name, date, value})
+				: addSurplus({name, date, value});
 				navigation.goBack();
 			}}/>
 		</View>
 	)
 }
 
-export default IncomeEditor;
+export default SurplusEditor;

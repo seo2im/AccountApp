@@ -10,13 +10,14 @@ function FixedExpense ({navigation}) {
 		<View>
 			<Text>FixedExpense</Text>
 			<Text>Total : {total}</Text>
+			<Button title="Add" onPress={() => navigation.navigate("FixedExpenseEditor", {name : null})} />
 			<FlatList
 				data={details}
 				keyExtractor={(item, index) => (`${index}_${item.name}`)}
 				ListEmptyContent={<Text>No Item</Text>}
 				renderItem={({item, index}) => (
 					<View>
-						<Text>{item.name} {item.value}</Text>
+						<Text onPress={() => navigation.navigate("FixedExpenseEditor", {name : item.name})}>{item.name} {item.value}</Text>
 					</View>
 				)}
 			/>

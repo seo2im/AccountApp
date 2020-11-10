@@ -14,11 +14,11 @@ function MustExpense ({navigation}) {
 				ListEmptyContent={<Text>No Item</Text>}
 				renderItem={({item, index}) => (
 					<View>
-						<Button title={`${item.name} ${item.assignTotal} ${item.useTotal}`} onPress={() => navigation.navigate('MustExpenseDetail', { item })} />
+						<Text onPress={() => navigation.navigate('MustExpenseItem', { item })}>{`${item.name} ${item.assignTotal} ${item.useTotal}`}</Text>
 					</View>
 				)}
 			/>
-			
+			<Button title="ADD" onPress={() => navigation.navigate('MustExpenseEditor', { name : null })} />
 		</View>
 	)
 }
