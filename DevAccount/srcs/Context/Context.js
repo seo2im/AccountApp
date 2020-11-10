@@ -21,10 +21,15 @@ import React, { createContext, useState, useEffect } from 'react'
 
 const Context = createContext({
 	account : 0,
+	modAccount : () => {},
 	income : { total : 0, details : []},
+	modIncome : () => {},
 	fixedExpense : { total : 0, details : []},
+	modFixedExpense : () => {},
 	mustExpense : { assignTotal : 0, useTotal : 0, lists : []},
-	surplus : { assignTotal : 0, useTotal : 0, details : []}
+	modMustExpense : () => {},
+	surplus : { assignTotal : 0, useTotal : 0, details : []},
+	modSurplus : () => {}
 })
 
 function ContextProvider ({ children }) {
@@ -33,6 +38,69 @@ function ContextProvider ({ children }) {
 	const [ fixedExpense, setFixedExpense ] = useState({ total : 0, details : []});
 	const [ mustExpense, setMustExpense ] = useState({ assignTotal : 0, useTotal : 0, lists : []});
 	const [ surplus, setSurplus ] = useState({ assignTotal : 0, useTotal : 0, details : []});
+
+	const modAccount = (value) => {
+		setAccount(value);
+	}
+
+	const modSurplus = (mode, detail) => {
+		switch (mode) {
+			case "CHANGE" :
+				const assignTotal = surplus.assignTotal + detail.value;
+				setSurplus({...surplus, assignTotal : assignTotal});
+				break;
+			case "USE" :
+				const useTotal = surplus.useTotal + detail.value;
+				setSurplus({...surplus, useTotal : useTotal, details : [detail, ...surplus.details]})
+				break;
+		}
+	}
+
+	const modIncome = (detail) => {
+		const total = income.total + detail.value;
+		setIncome({ total : total, details : [detail, ...income.details]})
+		modSurplus("CHANGE", {value : detail.value})
+	}
+
+	const modFixedExpense = (detail) => {
+		const total = fixedExpense.total + detail.value;
+		setFixedExpense({ total : total, details : [detail, ...fixedExpense.details]})
+		modSurplus("CHANGE", {value : -detail.value})
+	}
+
+	const modMustExpense = (mode, detail) => {
+		const { kind, ...data } = detail
+
+		switch (mode) {
+			case "CHANGE" :				
+				const {byCost, count} = data;
+				let diff = mustExpense.lists.find(e => e.name === kind).assignTotal;
+				const changedList = mustExpense.lists.map(e => {
+					if (e.name === kind) {
+						return {...e, byCost : byCost, count : count, assignTotal : byCost * count, balance : byCost * count - e.useTotal}
+					}
+					else
+						return e;
+				})
+				diff -= changedList.find(e => e.name === kind).assignTotal;
+				setMustExpense({...mustExpense, assignTotal : mustExpense.assignTotal - diff, lists : changedList});
+				modSurplus("CHANGE", {value : diff})
+				break;
+			case "USE" :
+				const {name, date, value} = data;
+				const useList = mustExpense.lists.map(e => {
+					if (e.name === kind) {
+						const useTotal = e.useTotal + value;
+						return ({...e, useTotal : useTotal, details : [{name, date, value}, ...e.details], balance : e.assignTotal - useTotal})
+					}
+					else
+						return e;
+				})
+				setMustExpense({...mustExpense, useTotal : mustExpense.useTotal + value, lists : useList});
+				break;
+		}
+	}
+
 
 	const initData = async () => { /* TODO : function devide : is possible? */
 		/*
@@ -85,6 +153,7 @@ function ContextProvider ({ children }) {
 	return (
 		<Context.Provider value={{
 			account, income, fixedExpense, mustExpense, surplus
+			,modAccount, modIncome, modFixedExpense, modMustExpense, modSurplus
 		}}>
 			{children}
 		</Context.Provider>

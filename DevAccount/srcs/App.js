@@ -12,8 +12,6 @@ import {
   Text,
 } from 'react-native';
 
-
-
 import { ContextProvider} from "./Context/Context"
 import Navigator from "./Screens/Navigator"
 
