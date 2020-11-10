@@ -3,6 +3,8 @@ import { View, Text, FlatList, Button } from 'react-native'
 
 import { Context } from '../Context/Context'
 
+import * as styled from '../Styles/Basic'
+
 function SurplusView ({navigation}) {
 	const { assignTotal, useTotal, details } = useContext(Context).surplus;
 
@@ -10,15 +12,15 @@ function SurplusView ({navigation}) {
 		<View>
 			<Text>남은돈 : {assignTotal - useTotal}</Text>
 			<Text>총액 : {assignTotal} 사용액 : {useTotal}</Text>
-			<Button title="Add" onPress={() => navigation.navigate("SurplusEditor", {id : null})} />
+			<styled.Button title="Add" onPress={() => navigation.navigate("SurplusEditor", {id : null})} />
 			<FlatList
 				data={details}
 				keyExtractor={(item, index) => (`${index}_${item.name}`)}
 				ListEmptyContent={<Text>No Item</Text>}
 				renderItem={({item, index}) => (
-					<View>
+					<styled.List>
 						<Text onPress={() => navigation.navigate("SurplusEditor", {id : item.id})}>{item.name} {item.date} {item.value}</Text>
-					</View>
+					</styled.List>
 				)}
 			/>
 		</View>

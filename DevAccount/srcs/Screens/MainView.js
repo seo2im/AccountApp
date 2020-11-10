@@ -3,6 +3,8 @@ import { View, Text, Button, FlatList } from 'react-native'
 
 import { Context } from '../Context/Context'
 
+import * as styled from '../Styles/Basic'
+
 function MainView ({navigation}) {
 	const {
 		account,
@@ -14,26 +16,26 @@ function MainView ({navigation}) {
 
 	return (
 		<View>
-			<Text>Account : {account}</Text>
-			<Text onPress={() => navigation.navigate("IncomeStack")}>
+			<styled.Content>Account : {account}</styled.Content>
+			<styled.Content onPress={() => navigation.navigate("IncomeStack")}>
 				Income : {income.total}
-			</Text>
-			<Text onPress={() => navigation.navigate("FixedExpenseStack")}>
+			</styled.Content>
+			<styled.Content onPress={() => navigation.navigate("FixedExpenseStack")}>
 				fixedExpense : {fixedExpense.total}
-			</Text>
-			<Text onPress={() => navigation.navigate('SurplusStack')}>
+			</styled.Content>
+			<styled.Content onPress={() => navigation.navigate('SurplusStack')}>
 				Surplus : {surplus.assignTotal} - {surplus.useTotal} = {surplus.assignTotal - surplus.useTotal}
-			</Text>
-			<Text onPress={() => navigation.navigate('MustExpenseStack')}>MustExpense</Text>
+			</styled.Content>
+			<styled.Content onPress={() => navigation.navigate('MustExpenseStack')}>MustExpense</styled.Content>
 			<FlatList
 				data={mustExpense.lists}
 				keyExtractor={(item, index) => (`${index}_${item.name}`)}
 				ListEmptyContent={<Text>No Item</Text>}
 				renderItem={({item, index}) => (
-					<View>
+					<styled.List>
 						<Text onPress={() => navigation.navigate('MustExpenseStack',  item.name)}>{item.name}</Text>
 						<Text>{item.assignTotal} - {item.useTotal} = {item.balance}</Text>
-					</View>
+					</styled.List>
 				)}
 			/>
 		</View>
