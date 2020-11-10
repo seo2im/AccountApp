@@ -35,7 +35,7 @@ function ContextProvider ({ children }) {
 	const [ income, addIncome, modIncome ] = useIncome();
 	const [ fixedExpense, addFixedExpense, modFixedExpense] = useFixedExpense();
 	const [ surplus, changeSurplusAssign, addSurplus, modSurplus ] = useSurplus();
-	const [ mustExpense, addMustExpense, modMustExpense ] = useMustExpense();
+	const [ mustExpense, addMustExpense, modMustExpense, addMustExpenseItem, modMustExpenseItem ] = useMustExpense();
 
 	return (
 		<Context.Provider value={{
@@ -43,7 +43,7 @@ function ContextProvider ({ children }) {
 			income, addIncome, modIncome,
 			fixedExpense, addFixedExpense, modFixedExpense,
 			surplus, changeSurplusAssign, addSurplus, modSurplus,
-			mustExpense, addMustExpense, modMustExpense 
+			mustExpense, addMustExpense, modMustExpense, addMustExpenseItem, modMustExpenseItem
 		}}>
 			{children}
 		</Context.Provider>

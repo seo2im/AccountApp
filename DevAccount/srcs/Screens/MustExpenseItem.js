@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, Button } from 'react-native'
 
 function MustExpenseItem ({route, navigation}) {
 	const { name, assignTotal, useTotal, details } = route.params.item;
@@ -15,10 +15,11 @@ function MustExpenseItem ({route, navigation}) {
 				ListEmptyContent={<Text>No Item</Text>}
 				renderItem={({item, index}) => (
 					<View>
-						<Text>{item.name} {item.date} {item.value}</Text>
+						<Text onPress={() => navigation.navigate('MustExpenseItemEditor', { kind : name, name : item.name })}>{item.name} {item.date} {item.value}</Text>
 					</View>
 				)}
 			/>
+			<Button title="ADD" onPress={() => navigation.navigate('MustExpenseItemEditor', { kind : name, name : null })} />
 		</View>
 	)
 }

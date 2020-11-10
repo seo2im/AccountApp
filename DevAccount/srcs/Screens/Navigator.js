@@ -8,6 +8,7 @@ import MainView from "./MainView"
 import MustExpense from "./MustExpense"
 import MustExpenseItem from "./MustExpenseItem"
 import MustExpenseEditor from "../Editor/MustExpenseEditor"
+import MustExpenseItemEditor from '../Editor/MustExpenseItemEditor'
 
 import Income from "./Income"
 import IncomeEditor from "../Editor/IncomeEditor"
@@ -56,6 +57,7 @@ function MustExpenseStack ({route}) {
 			<Stack.Screen name="MustExpense" component={MustExpense}/>
 			<Stack.Screen name="MustExpenseItem" component={MustExpenseItem} initialParams={{item : lists.filter(e => e.name === name)[0]}}/>
 			<Stack.Screen name="MustExpenseEditor" component={MustExpenseEditor} />
+			<Stack.Screen name="MustExpenseItemEditor" component={MustExpenseItemEditor} />
 		</Stack.Navigator>
 		
 	)

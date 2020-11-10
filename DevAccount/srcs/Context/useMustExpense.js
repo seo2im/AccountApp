@@ -49,39 +49,37 @@ function useMustExpense () {
 		callback(); //chagneSurplusAssign
 	}
 
-	const addMustExpenseItem = () => {
-
+	const addMustExpenseItem = ({kind, name, date, value}) => {
+		const lists = mustExpense.lists.map(e => {
+			if (e.name === kind) {
+				const useTotal = e.useTotal + value;
+				return ({...e, useTotal : useTotal, details : [{name, date, value}, ...e.details], balance : e.assignTotal - useTotal})
+			}
+			else
+				return e;
+		})
+		setMustExpense({...mustExpense, useTotal : mustExpense.useTotal + value, lists : lists});
 	}
 
-	const modMustExpenseItem = () => {
-		
-	}
-
-/*
-	const modMustExpense = (mode, detail) => {
-		const { kind, ...data } = detail
-
-		switch (mode) {
-			case "CHANGE" :				
-				
-				break;
-			case "USE" :
-				const {name, date, value} = data;
-				const useList = mustExpense.lists.map(e => {
-					if (e.name === kind) {
-						const useTotal = e.useTotal + value;
-						return ({...e, useTotal : useTotal, details : [{name, date, value}, ...e.details], balance : e.assignTotal - useTotal})
-					}
+	const modMustExpenseItem = ({kind, name, date, value}) => {
+		const lists = mustExpense.lists.map(e => {
+			if (e.name === kind) {
+				const details = e.details.map(d => {
+					if (d.name === name)
+						return {name, date, value};
 					else
-						return e;
+						return d;
 				})
-				setMustExpense({...mustExpense, useTotal : mustExpense.useTotal + value, lists : useList});
-				break;
-		}
+				const useTotal = details.reduce((acc, cur) => acc + cur.value, 0);
+				return {...e, useTotal : useTotal, details : details, balance : e.assignTotal - useTotal};
+			}
+			else
+				return e;
+		})
+		setMustExpense({...mustExpense, useTotal : mustExpense.lists.reduce((acc, cur) => acc + cur.useTotal, 0), lists : lists});
 	}
-*/
 
-	return [mustExpense, addMustExpense, modMustExpense];
+	return [mustExpense, addMustExpense, modMustExpense, addMustExpenseItem, modMustExpenseItem ];
 }
 
 export default useMustExpense;
