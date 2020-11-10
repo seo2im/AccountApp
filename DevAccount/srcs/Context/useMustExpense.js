@@ -15,8 +15,8 @@ function useMustExpense () {
 				byCost : 4100,
 				count : 16,
 				useTotal : 20000,
-				details : [{name : "StarBucks", date : "20201105", value : 10000},
-							{name : "StarBucks", date : "20201101", value : 10000}],
+				details : [{id : 1, name : "StarBucks", date : "20201105", value : 10000},
+							{id : 0, name : "StarBucks", date : "20201101", value : 10000}],
 				balance : 45600
 			},{
 				name : "교통",
@@ -24,17 +24,18 @@ function useMustExpense () {
 				byCost : 3300,
 				count : 8,
 				useTotal : 10000,
-				details : [{name : "Card", date : "20201101", value : 10000}],
+				details : [{id : 0, name : "Card", date : "20201101", value : 10000}],
 				balance : 16400
 			}]});
 	}
 
 	useEffect(() => testInitMustExpense(), []);
 
-	const addMustExpense = ({name, byCost, count}, callback) => {
+	const addMustExpense = ({name, byCost, count}, changeSurplus) => {
 		const lists = [...mustExpense.lists, { name, byCost, count, assignTotal : byCost * count, useTotal : 0, details : [], balance : byCost * count}]
-		setMustExpense({...setMustExpense, lists : lists});
-		callback(); //changeSurplusAssign
+		const assignTotal = mustExpense.assignTotal + byCost * count;
+		setMustExpense({...mustExpense, assignTotal : assignTotal, lists : lists});
+		changeSurplus(assignTotal);
 	}
 
 	const modMustExpense = ({name, byCost, count}, callback) => {
@@ -46,14 +47,15 @@ function useMustExpense () {
 		})
 		const assignTotal = mustExpense.lists.reduce((acc, cur) => acc + cur.useTotal, 0);
 		setMustExpense({...mustExpense, assignTotal : assignTotal, lists : lists});
-		callback(); //chagneSurplusAssign
+		changeSurplus(assignTotal);
 	}
 
 	const addMustExpenseItem = ({kind, name, date, value}) => {
 		const lists = mustExpense.lists.map(e => {
 			if (e.name === kind) {
+				const id = e.details.length;
 				const useTotal = e.useTotal + value;
-				return ({...e, useTotal : useTotal, details : [{name, date, value}, ...e.details], balance : e.assignTotal - useTotal})
+				return ({...e, useTotal : useTotal, details : [{id, name, date, value}, ...e.details], balance : e.assignTotal - useTotal})
 			}
 			else
 				return e;
@@ -61,12 +63,12 @@ function useMustExpense () {
 		setMustExpense({...mustExpense, useTotal : mustExpense.useTotal + value, lists : lists});
 	}
 
-	const modMustExpenseItem = ({kind, name, date, value}) => {
+	const modMustExpenseItem = ({kind, id, name, date, value}) => {
 		const lists = mustExpense.lists.map(e => {
 			if (e.name === kind) {
 				const details = e.details.map(d => {
-					if (d.name === name)
-						return {name, date, value};
+					if (d.id === id)
+						return {id, name, date, value};
 					else
 						return d;
 				})

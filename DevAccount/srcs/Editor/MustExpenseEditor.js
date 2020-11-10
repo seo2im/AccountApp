@@ -18,27 +18,26 @@ function MustExpenseEditor ({route, navigation}) {
 
 	return (
 		<View>
-			{isEdit ? <Text>{name}</Text>
-			: <TextInput
+			<TextInput
 				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
 				onChangeText={text => {name = text}}
-				value={0}
-	  		/>}
+				defaultValue={name}
+	  		/>
 			<TextInput
-				  style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				  keyboardType='number-pad'
-      			onChangeText={text => {byCost = Number(text)}}
-      			value={0}
+				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+				keyboardType='number-pad'
+				onChangeText={text => {byCost = Number(text)}}
+				defaultValue={String(byCost)}
     		/>
 			<TextInput
-				  style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				  keyboardType='number-pad'
-      			onChangeText={text => {count = Number(text)}}
-      			value={0}
+				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+				keyboardType='number-pad'
+				onChangeText={text => {count = Number(text)}}
+				defaultValue={String(count)}
     		/>
 			<Button title="setIncome" onPress={()=> {
-				isEdit ? modMustExpense({name, byCost, count}, () => changeSurplusAssign(50000))
-						: addMustExpense({name, byCost, count}, () => changeSurplusAssign(50000));
+				isEdit ? modMustExpense({name, byCost, count}, (expense) => changeSurplusAssign("mustExpense", expense))
+						: addMustExpense({name, byCost, count}, (expense) => changeSurplusAssign("mustExpense", expense));
 				navigation.goBack();
 			}}/>
 		</View>

@@ -18,21 +18,20 @@ function FixedExpenseEditor ({route, navigation}) {
 	return (
 		<View>
 			<Text>fixedExpense : {fixedExpense.total}</Text>
-			{isEdit ? <Text>{name}</Text>
-			: <TextInput
+			<TextInput
 				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
 				onChangeText={text => {name = text}}
-				value={0}
-	  		/>}
+				defaultValue={name}
+	  		/>
 			<TextInput
-				  style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				  keyboardType='number-pad'
-      			onChangeText={text => {value = Number(text)}}
-      			value={0}
+				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+				keyboardType='number-pad'
+				onChangeText={text => {value = Number(text)}}
+				defaultValue={String(value)}
     		/>
 			<Button title="setfixedExpense" onPress={()=> {
-				isEdit ? modFixedExpense({name, value}, () => changeSurplusAssign(50000))
-				: addFixedExpense({name, value}, () => changeSurplusAssign(50000));
+				isEdit ? modFixedExpense({name, value}, (expense) => changeSurplusAssign("fixedExpense", expense))
+				: addFixedExpense({name, value}, (expense) => changeSurplusAssign("fixedExpense", expense));
 				navigation.goBack();
 			}}/>
 		</View>

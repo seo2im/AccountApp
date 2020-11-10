@@ -14,7 +14,7 @@ function MustExpense ({navigation}) {
 				ListEmptyContent={<Text>No Item</Text>}
 				renderItem={({item, index}) => (
 					<View>
-						<Text onPress={() => navigation.navigate('MustExpenseItem', { item })}>{`${item.name} ${item.assignTotal} ${item.useTotal}`}</Text>
+						<Text onPress={() => navigation.navigate('MustExpenseItem', { kind : item.name })}>{`${item.name} ${item.assignTotal} ${item.useTotal}`}</Text>
 					</View>
 				)}
 			/>

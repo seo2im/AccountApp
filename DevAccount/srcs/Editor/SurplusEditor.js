@@ -10,29 +10,29 @@ function SurplusEditor ({route, navigation}) {
 		modSurplus
 	} = useContext(Context);
 
-	const isEdit = route.params.name ? true : false;
-	let name = isEdit ? route.params.name : "";
-	let value = isEdit ? surplus.details.find(e => e.name === name).value : 0;
+	const isEdit = route.params.id ? true : false;
+	const id = isEdit ? route.params.id : 0;
+	let name = isEdit ? surplus.details.find(e => e.id === id).name : "";
+	let value = isEdit ? surplus.details.find(e => e.id === id).value : 0;
 	const time = new Date();
-	let date = isEdit ? surplus.details.find(e => e.name === name).date : `${time.getFullYear()}-${time.getMonth()}-${time.getDate()}`;
+	let date = isEdit ? surplus.details.find(e => e.id === id).date : `${time.getFullYear()}-${time.getMonth()}-${time.getDate()}`;
 
 	return (
 		<View>
 			<Text>surplus : {surplus.useTotal}</Text>
-			{isEdit ? <Text>{name}</Text>
-			: <TextInput
+			<TextInput
 				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
 				onChangeText={text => {name = text}}
-				value={0}
-	  		/>}
+				defaultValue={name}
+	  		/>
 			<TextInput
-				  style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				  keyboardType='number-pad'
+				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+				keyboardType='number-pad'
       			onChangeText={text => {value = Number(text)}}
-      			value={0}
+      			defaultValue={String(value)}
     		/>
 			<Button title="SetSurplus" onPress={()=> {
-				isEdit ? modSurplus({name, date, value})
+				isEdit ? modSurplus({id, name, date, value})
 				: addSurplus({name, date, value});
 				navigation.goBack();
 			}}/>

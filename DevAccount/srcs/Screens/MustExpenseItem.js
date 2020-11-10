@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Text, FlatList, Button } from 'react-native'
 
+import { Context } from '../Context/Context'
+
 function MustExpenseItem ({route, navigation}) {
-	const { name, assignTotal, useTotal, details } = route.params.item;
+	const { kind } = route.params;
+	const { mustExpense } = useContext(Context);
+	const { name, assignTotal, useTotal, details } = mustExpense.lists.find(e => e.name === kind)
 
 	return (
 		<View>
@@ -15,11 +19,11 @@ function MustExpenseItem ({route, navigation}) {
 				ListEmptyContent={<Text>No Item</Text>}
 				renderItem={({item, index}) => (
 					<View>
-						<Text onPress={() => navigation.navigate('MustExpenseItemEditor', { kind : name, name : item.name })}>{item.name} {item.date} {item.value}</Text>
+						<Text onPress={() => navigation.navigate('MustExpenseItemEditor', { kind : name, id : item.id })}>{item.name} {item.date} {item.value}</Text>
 					</View>
 				)}
 			/>
-			<Button title="ADD" onPress={() => navigation.navigate('MustExpenseItemEditor', { kind : name, name : null })} />
+			<Button title="ADD" onPress={() => navigation.navigate('MustExpenseItemEditor', { kind : name, id : null })} />
 		</View>
 	)
 }

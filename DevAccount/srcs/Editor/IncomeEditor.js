@@ -18,21 +18,20 @@ function IncomeEditor ({route, navigation}) {
 	return (
 		<View>
 			<Text>Income : {income.total}</Text>
-			{isEdit ? <Text>{name}</Text>
-			: <TextInput
+			<TextInput
 				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
 				onChangeText={text => {name = text}}
-				value={0}
-	  		/>}
+				defaultValue={name}
+	  		/>
 			<TextInput
-				  style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				  keyboardType='number-pad'
-      			onChangeText={text => {value = Number(text)}}
-      			value={value}
+				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+				keyboardType='number-pad'
+				onChangeText={text => {value = Number(text)}}
+				defaultValue={String(value)}
     		/>
 			<Button title="setIncome" onPress={()=> {
-				isEdit ? modIncome({name, value}, () => changeSurplusAssign(50000))
-						: addIncome({name, value}, () => changeSurplusAssign(50000));
+				isEdit ? modIncome({name, value}, (income) => changeSurplusAssign("income", income))
+						: addIncome({name, value}, (income) => changeSurplusAssign("income", income));
 				navigation.goBack();
 			}}/>
 		</View>

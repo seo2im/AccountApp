@@ -18,13 +18,13 @@ function useFixedExpense() {
 
 	useEffect(() => testInitFixedExpense(), []);
 
-	const addFixedExpense = (detail, callback) => {
+	const addFixedExpense = (detail, changeSurplus) => {
 		const total = fixedExpense.total + detail.value;
 		setFixedExpense({ total : total, details : [detail, ...fixedExpense.details]})
-		callback(); // ChangeSurplus
+		changeSurplus(total); 
 	}
 
-	const modFixedExpense = (detail, callback) => {
+	const modFixedExpense = (detail, changeSurplus) => {
 		const details = fixedExpense.details.map(e => {
 			if (e.name === detail.name)
 				return detail;
@@ -33,7 +33,7 @@ function useFixedExpense() {
 		});
 		const total = details.reduce((acc, cur) => acc + cur.value, 0);
 		setFixedExpense({total : total, details : details});
-		callback(); // ChangeSurplus
+		changeSurplus(total); 
 	}
 
 	return [ fixedExpense, addFixedExpense, modFixedExpense ];

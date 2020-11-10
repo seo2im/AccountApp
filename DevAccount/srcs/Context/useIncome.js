@@ -13,13 +13,13 @@ function useIncome () {
 
 	useEffect(() => testInitIncome(), []);
 
-	const addIncome = (detail, callback) => {
+	const addIncome = (detail, changeSurplus) => {
 		const total = income.total + detail.value;
 		setIncome({ total : total, details : [detail, ...income.details]})
-		callback(); // ChangeSurplus
+		changeSurplus(total); 
 	}
 	
-	const modIncome = (detail, callback) => {
+	const modIncome = (detail, changeSurplus) => {
 		const details = income.details.map(e => {
 			if (e.name === detail.name)
 				return detail;
@@ -28,7 +28,7 @@ function useIncome () {
 		});
 		const total = details.reduce((acc, cur) => acc + cur.value, 0);
 		setIncome({total : total, details : details});
-		callback(); // ChangeSurplus
+		changeSurplus(total); 
 	}	
 
 	return [ income, addIncome, modIncome ];

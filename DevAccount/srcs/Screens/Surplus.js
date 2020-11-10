@@ -10,14 +10,14 @@ function SurplusView ({navigation}) {
 		<View>
 			<Text>남은돈 : {assignTotal - useTotal}</Text>
 			<Text>총액 : {assignTotal} 사용액 : {useTotal}</Text>
-			<Button title="Add" onPress={() => navigation.navigate("SurplusEditor", {name : null})} />
+			<Button title="Add" onPress={() => navigation.navigate("SurplusEditor", {id : null})} />
 			<FlatList
 				data={details}
 				keyExtractor={(item, index) => (`${index}_${item.name}`)}
 				ListEmptyContent={<Text>No Item</Text>}
 				renderItem={({item, index}) => (
 					<View>
-						<Text onPress={() => navigation.navigate("SurplusEditor", {name : item.name})}>{item.name} {item.date} {item.value}</Text>
+						<Text onPress={() => navigation.navigate("SurplusEditor", {id : item.id})}>{item.name} {item.date} {item.value}</Text>
 					</View>
 				)}
 			/>

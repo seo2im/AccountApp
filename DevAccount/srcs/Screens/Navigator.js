@@ -49,13 +49,13 @@ function SurplusStack () {
 }
 
 function MustExpenseStack ({route}) {
-	const name = route.params;
+	const kind = route.params;
 	const { lists } = useContext(Context).mustExpense;
 	
 	return (	
-		<Stack.Navigator initialRouteName={name ? "MustExpenseItem" : "MustExpense"}>
+		<Stack.Navigator initialRouteName={kind ? "MustExpenseItem" : "MustExpense"}>
 			<Stack.Screen name="MustExpense" component={MustExpense}/>
-			<Stack.Screen name="MustExpenseItem" component={MustExpenseItem} initialParams={{item : lists.filter(e => e.name === name)[0]}}/>
+			<Stack.Screen name="MustExpenseItem" component={MustExpenseItem} initialParams={{ kind }}/>
 			<Stack.Screen name="MustExpenseEditor" component={MustExpenseEditor} />
 			<Stack.Screen name="MustExpenseItemEditor" component={MustExpenseItemEditor} />
 		</Stack.Navigator>
