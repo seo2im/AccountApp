@@ -1,27 +1,26 @@
 import React from 'react'
-import { Text, FlatList } from 'react-native'
+import { View, FlatList, TouchableOpacity } from 'react-native'
 
 import * as styled from "../Styles/Basic"
 
 function MainList ({name, data, navigation, linkName}) {
 	return (
-		<styled.MainItemContainer>
-			<styled.MainListText
-				onPress={() => navigation.navigate(linkName)}>
-				{name}
-			</styled.MainListText>
+		<styled.Box style={{marginTop : 3}}>
 			<FlatList
 				data={data.lists}
 				keyExtractor={(item, index) => (`${index}_${item.name}`)}
-				ListEmptyContent={<Text>No Item</Text>}
 				renderItem={({item, index}) => (
-					<styled.List>
-						<styled.ListHead onPress={() => navigation.navigate(linkName,  item.name)}>{item.name}</styled.ListHead>
-						<Text>{item.assignTotal} - {item.useTotal} = {item.balance}</Text>
-					</styled.List>
+					<TouchableOpacity
+						onPress={() => navigation.navigate(linkName,  item.name)}
+						style={{marginBottom : index === data.lists.length - 1 ? 0 : 30}}>
+						<styled.BoxName>
+							{item.name}
+						</styled.BoxName>
+						<styled.BoxValue>{item.balance}</styled.BoxValue>
+					</TouchableOpacity>
 				)}
 			/>
-		</styled.MainItemContainer>
+		</styled.Box>
 	)
 }
 

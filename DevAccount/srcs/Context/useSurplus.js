@@ -9,9 +9,9 @@ function useSurplus() {
 
 	const testInitSurplus = () => {
 		setSurplus({income : 912000, fixedExpense : 422650, mustExpense : 96000, assignTotal : 393350, useTotal : 10000,
-					details : [{id : 2, name : "jam", date : "20201108", value : 2000},
-								{id : 1, name : "jam2", date : "20201106", value : 4000},
-								{id : 0, name : "jam3", date : "20201102", value : 4000}]})
+					details : [{id : 2, name : "jam", date : "20.11.08", value : 2000},
+								{id : 1, name : "jam2", date : "20.11.06", value : 4000},
+								{id : 0, name : "jam3", date : "20.11.02", value : 4000}]})
 	}
 
 	useEffect(() => testInitSurplus(), []);
