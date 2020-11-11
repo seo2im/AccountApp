@@ -3,7 +3,10 @@ import { View, Text, Button, FlatList } from 'react-native'
 
 import { Context } from '../Context/Context'
 
-import * as styled from '../Styles/Basic'
+import MainItem from '../Component/MainItem'
+import MainList from '../Component/MainList'
+
+import * as styled from "../Styles/Basic"
 
 function MainView ({navigation}) {
 	const {
@@ -16,28 +19,16 @@ function MainView ({navigation}) {
 
 	return (
 		<View>
-			<styled.Content>Account : {account}</styled.Content>
-			<styled.Content onPress={() => navigation.navigate("IncomeStack")}>
-				Income : {income.total}
-			</styled.Content>
-			<styled.Content onPress={() => navigation.navigate("FixedExpenseStack")}>
-				fixedExpense : {fixedExpense.total}
-			</styled.Content>
-			<styled.Content onPress={() => navigation.navigate('SurplusStack')}>
-				Surplus : {surplus.assignTotal} - {surplus.useTotal} = {surplus.assignTotal - surplus.useTotal}
-			</styled.Content>
-			<styled.Content onPress={() => navigation.navigate('MustExpenseStack')}>MustExpense</styled.Content>
-			<FlatList
-				data={mustExpense.lists}
-				keyExtractor={(item, index) => (`${index}_${item.name}`)}
-				ListEmptyContent={<Text>No Item</Text>}
-				renderItem={({item, index}) => (
-					<styled.List>
-						<Text onPress={() => navigation.navigate('MustExpenseStack',  item.name)}>{item.name}</Text>
-						<Text>{item.assignTotal} - {item.useTotal} = {item.balance}</Text>
-					</styled.List>
-				)}
-			/>
+			<MainItem name="Account" data={account}
+				link={() => {}}/>
+			<MainItem name="Income" data={income.total}
+				link={() => navigation.navigate("IncomeStack")}/>
+			<MainItem name="Fixed Expense" data={fixedExpense.total}
+				link={() => navigation.navigate("FixedExpenseStack")}/>
+			<MainItem name="Surplus" data={`${surplus.assignTotal} - ${surplus.useTotal} = ${surplus.assignTotal - surplus.useTotal}`}
+				link={() => navigation.navigate("SurplusStack")}/>
+			<MainList name="Must Expense" data={mustExpense}
+				navigation={navigation} linkName="MustExpenseStack"/>
 		</View>
 	)
 }
