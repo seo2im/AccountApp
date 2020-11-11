@@ -21,39 +21,14 @@ import SurplusEditor from "../Editor/SurplusEditor"
 
 const Stack = createStackNavigator();
 
-function IncomeStack () {
-	return (
-		<Stack.Navigator>
-			<Stack.Screen name="Income" component={Income} />
-			<Stack.Screen name="IncomeEditor" component={IncomeEditor} />
-		</Stack.Navigator>
-	)
-}
-
-function FixedExpenseStack () {
-	return (
-		<Stack.Navigator>
-			<Stack.Screen name="FixedExpense" component={FixedExpense} />
-			<Stack.Screen name="FixedExpenseEditor" component={FixedExpenseEditor} />
-		</Stack.Navigator>
-	)
-}
-
-function SurplusStack () {
-	return (
-		<Stack.Navigator>
-			<Stack.Screen name="Surplus" component={Surplus} />
-			<Stack.Screen name="SurplusEditor" component={SurplusEditor} />
-		</Stack.Navigator>
-	)
-}
-
 function MustExpenseStack ({route}) {
 	const kind = route.params;
 	const { lists } = useContext(Context).mustExpense;
 	
 	return (	
-		<Stack.Navigator initialRouteName={kind ? "MustExpenseItem" : "MustExpense"}>
+		<Stack.Navigator 
+			headerMode="none"
+			initialRouteName={kind ? "MustExpenseItem" : "MustExpense"}>
 			<Stack.Screen name="MustExpense" component={MustExpense}/>
 			<Stack.Screen name="MustExpenseItem" component={MustExpenseItem} initialParams={{ kind }}/>
 			<Stack.Screen name="MustExpenseEditor" component={MustExpenseEditor} />
@@ -66,11 +41,11 @@ function MustExpenseStack ({route}) {
 function Navigator () {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator>
+			<Stack.Navigator headerMode="none">
 				<Stack.Screen name="Main" component={MainView} />
-				<Stack.Screen name="IncomeStack" component={IncomeStack} />
-				<Stack.Screen name="FixedExpenseStack" component={FixedExpenseStack} />
-				<Stack.Screen name="SurplusStack" component={SurplusStack} />
+				<Stack.Screen name="Surplus" component={Surplus} />
+				<Stack.Screen name="Income" component={Income} />
+				<Stack.Screen name="FixedExpense" component={FixedExpense} />
 				<Stack.Screen name="MustExpenseStack" component={MustExpenseStack} />
 			</Stack.Navigator>
 		</NavigationContainer>

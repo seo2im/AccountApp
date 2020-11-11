@@ -1,12 +1,14 @@
-import React, { useContext } from 'react'
-import { View, Text, FlatList, Button } from 'react-native'
+import React, { useContext, useState } from 'react'
+import { View, Text, FlatList, Button, Modal } from 'react-native'
 
 import { Context } from '../Context/Context'
+import SurplusEditor from '../Editor/SurplusEditor'
 
 import * as styled from '../Styles/Basic'
 
 function SurplusView ({navigation}) {
 	const { assignTotal, useTotal, details } = useContext(Context).surplus;
+	const [ edit, setEdit ] = useState(false);
 
 	return (
 		<styled.ViewContainer>
@@ -28,6 +30,11 @@ function SurplusView ({navigation}) {
 					</styled.List>
 				)}
 			/>
+			<Button title="test" onPress={() => setEdit(!edit)}/>
+			<Modal
+				visible={edit}>
+				<SurplusEditor />
+			</Modal>
 		</styled.ViewContainer>
 	)
 }

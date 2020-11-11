@@ -30,7 +30,6 @@ function MustExpenseItem ({route, navigation}) {
 					</styled.List>
 				)}
 			/>
-			<Button title="ADD" onPress={() => navigation.navigate('MustExpenseItemEditor', { kind : name, id : null })} />
 		</styled.ViewContainer>
 	)
 }

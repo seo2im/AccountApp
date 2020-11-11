@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { Modal } from 'react-native'
+import React, { useContext, useState } from 'react'
+import { Modal, Button, Text } from 'react-native'
 
 import { Context } from '../Context/Context'
 
@@ -18,10 +18,12 @@ function MainView ({navigation}) {
 		surplus,
 	} = useContext(Context)
 
+	const [visible, setVisible ]= useState(false);
+
 	return (
 		<>
 			<MainItem name="여유금" data={surplus.assignTotal - surplus.useTotal}
-				link={() => navigation.navigate("SurplusStack")}/>
+				link={() => navigation.navigate("Surplus")}/>
 			<styled.BoxTitle
 				onPress={() => navigation.navigate("MustExpenseStack")}>
 				{"필수 지출"}
@@ -36,10 +38,10 @@ function MainView ({navigation}) {
 					link={() => {}}
 					margin={0}/>
 				<MainBox name="수입" data={income.total}
-					link={() => navigation.navigate("IncomeStack")}
+					link={() => navigation.navigate("Income")}
 					margin={30}/>
 				<MainBox name="고정 지출" data={fixedExpense.total}
-					link={() => navigation.navigate("FixedExpenseStack")}
+					link={() => navigation.navigate("FixedExpense")}
 					margin={30}/>
 			</styled.Box>
 		</>
