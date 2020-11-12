@@ -1,9 +1,12 @@
 import React, { useContext } from 'react'
-import { View, Text, Button, TextInput } from 'react-native'
+import { View, Button, TextInput } from 'react-native'
+import Horizontal from '../Component/HorizontalBox'
 
 import { Context } from '../Context/Context'
 
-function MustExpenseEditor ({route, navigation}) {
+import * as styled from '../Styles/Editor'
+
+function MustExpenseEditor ({setEdit, name}) {
 	const {
 		mustExpense,
 		addMustExpense,
@@ -11,36 +14,40 @@ function MustExpenseEditor ({route, navigation}) {
 		changeSurplusAssign
 	} = useContext(Context);
 
-	const isEdit = route.params.name ? true : false;
-	let name = isEdit ? route.params.name : "";
+	const isEdit = name !== "" ? true : false;
 	let byCost = isEdit ? mustExpense.lists.find(e => e.name === name).byCost : 0;
 	let count = isEdit ? mustExpense.lists.find(e => e.name === name).count : 0;
 
 	return (
-		<View>
-			<TextInput
-				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				onChangeText={text => {name = text}}
-				defaultValue={name}
-	  		/>
-			<TextInput
-				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				keyboardType='number-pad'
-				onChangeText={text => {byCost = Number(text)}}
-				defaultValue={String(byCost)}
-    		/>
-			<TextInput
-				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				keyboardType='number-pad'
-				onChangeText={text => {count = Number(text)}}
-				defaultValue={String(count)}
-    		/>
-			<Button title="setIncome" onPress={()=> {
+		<styled.EditContainer>
+			<Horizontal space={false}>
+				<styled.Title>이름</styled.Title>
+				<styled.Input
+					onChangeText={text => {name = text}}
+					defaultValue={name}/>
+			</Horizontal>
+			<Horizontal space={false}>
+				<styled.Title>회당 비용</styled.Title>
+				<styled.Input
+					keyboardType='number-pad'
+					onChangeText={text => {byCost = Number(text)}}
+					defaultValue={String(byCost)}/>
+			</Horizontal>
+			<Horizontal space={false}>
+				<styled.Title>횟수</styled.Title>
+				<styled.Input
+					keyboardType='number-pad'
+					onChangeText={text => {byCost = Number(text)}}
+					defaultValue={String(byCost)}/>
+			</Horizontal>
+			<styled.Set onPress={()=> {
 				isEdit ? modMustExpense({name, byCost, count}, (expense) => changeSurplusAssign("mustExpense", expense))
-						: addMustExpense({name, byCost, count}, (expense) => changeSurplusAssign("mustExpense", expense));
-				navigation.goBack();
-			}}/>
-		</View>
+				: addMustExpense({name, byCost, count}, (expense) => changeSurplusAssign("mustExpense", expense));
+				setEdit(false);
+			}}>
+				<styled.Text>추가</styled.Text>
+			</styled.Set>
+		</styled.EditContainer>
 	)
 }
 

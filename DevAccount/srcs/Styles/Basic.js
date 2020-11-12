@@ -27,6 +27,7 @@ const BoxValue = styled.Text`
 `
 
 const ViewContainer = styled.View`
+	flex : 1;
 	margin : 20px;
 `
 
@@ -44,14 +45,14 @@ const Value = styled.Text`
 const SubBox = styled.View`
 	border-top-width : 2.5px;
 	border-bottom-width : 2.5px;
-	padding-top : 10px;
+	padding-top : 40px;
 	margin-bottom : 20px;
 `
 
 const SubText = styled.Text`
 	font-family : ${Fonts.GongGothicM};
 	font-size : 15px;
-	margin-bottom : 10px;
+	margin-bottom : 40px;
 `
 
 const List = styled.TouchableOpacity`
@@ -69,35 +70,5 @@ const ListText = styled.Text`
 	font-size : 15px;
 `
 
-const MainItemContainer = styled.View`
-	background-color : white;
-	border-radius : 10px;
-	padding : 15px;
-	margin : 15px;
-	elevation : 20;
-`
-
-const MainItemText = styled.Text`
-	font-size : 15px;
-`
-
-const MainListText = styled.Text`
-	font-size : 15px;
-	border-bottom-color : black;
-	border-bottom-width : 1px;
-	margin-bottom : 10px;
-`
-
-const Button = styled.Button`
-	margin : 1rem;
-`
-
-
-
-const ListHead = styled.Text`
-	font-weight : bold;
-`
-
 export { Box, BoxName, BoxValue, BoxTitle,
-			ViewContainer, Title, Value, SubBox, SubText, List, ListTitle, ListText,
-	ListHead, MainListText, MainItemContainer, MainItemText, Button };
+			ViewContainer, Title, Value, SubBox, SubText, List, ListTitle, ListText};

@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
 import { View, Text, Button, TextInput } from 'react-native'
+import Horizontal from '../Component/HorizontalBox'
 
 import { Context } from '../Context/Context'
+import * as styled from '../Styles/Editor'
 
-function IncomeEditor ({route, navigation}) {
+function IncomeEditor ({setEdit, name}) {
 	const {
 		income,
 		addIncome,
@@ -11,30 +13,32 @@ function IncomeEditor ({route, navigation}) {
 		changeSurplusAssign
 	} = useContext(Context);
 
-	const isEdit = route.params.name ? true : false;
-	let name = isEdit ? route.params.name : "";
+	const isEdit = name !== "" ? true : false;
 	let value = isEdit ? income.details.find(e => e.name === name).value : 0;
 
 	return (
-		<View>
-			<Text>Income : {income.total}</Text>
-			<TextInput
-				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				onChangeText={text => {name = text}}
-				defaultValue={name}
-	  		/>
-			<TextInput
-				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				keyboardType='number-pad'
-				onChangeText={text => {value = Number(text)}}
-				defaultValue={String(value)}
-    		/>
-			<Button title="setIncome" onPress={()=> {
+		<styled.EditContainer>
+			<Horizontal space={false}>
+				<styled.Title>내용</styled.Title>
+				<styled.Input
+					onChangeText={text => {name = text}}
+					defaultValue={name}/>
+			</Horizontal>
+			<Horizontal space={false}>
+				<styled.Title>액수</styled.Title>
+				<styled.Input
+					keyboardType='number-pad'
+      				onChangeText={text => {value = Number(text)}}
+      				defaultValue={String(value)}/>
+			</Horizontal>
+			<styled.Set onPress={()=> {
 				isEdit ? modIncome({name, value}, (income) => changeSurplusAssign("income", income))
 						: addIncome({name, value}, (income) => changeSurplusAssign("income", income));
-				navigation.goBack();
-			}}/>
-		</View>
+				setEdit(false);
+			}}>
+				<styled.Text>추가</styled.Text>
+			</styled.Set>
+		</styled.EditContainer>
 	)
 }
 
