@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import Horizontal from '../Component/HorizontalBox'
+import React, { useContext, useEffect } from 'react'
+import Horizontal from '../Component/Horizontal'
 
 import { Context } from '../Context/Context'
 

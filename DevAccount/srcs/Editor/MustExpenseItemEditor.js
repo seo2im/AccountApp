@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { View, Text, Button, TextInput } from 'react-native'
-import Horizontal from '../Component/HorizontalBox'
+import Horizontal from '../Component/Horizontal'
 
 import { Context } from '../Context/Context'
 
@@ -33,14 +33,12 @@ function MustExpenseItemEditor ({setEdit, kind, id}) {
 				<styled.Input
 					keyboardType='number-pad'
 					onChangeText={text => {value = Number(text)}}
-					defaultValue={String(value)}
-    			/>
+					defaultValue={String(value)}/>
 			</Horizontal>
 			<styled.Set onPress={()=> {
 				isEdit ? modMustExpenseItem({kind, id, name, date, value})
 				: addMustExpenseItem({kind, name, date, value});
-				setEdit(false);
-			}}>
+				setEdit(false);}}>
 				<styled.Text>추가</styled.Text>
 			</styled.Set>
 		</styled.EditContainer>

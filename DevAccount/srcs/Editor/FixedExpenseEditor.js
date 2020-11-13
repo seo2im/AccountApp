@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
-import { View, Text, Button, TextInput } from 'react-native'
-import Horizontal from '../Component/HorizontalBox'
+import Horizontal from '../Component/Horizontal'
 
 import { Context } from '../Context/Context'
 

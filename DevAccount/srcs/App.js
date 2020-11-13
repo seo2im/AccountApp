@@ -1,25 +1,18 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import {
-  View,
-  Text,
-} from 'react-native';
 
-import { ContextProvider} from "./Context/Context"
 import Navigator from "./Screens/Navigator"
+import Header from './Component/Header'
+
+import { ContextProvider } from "./Context/Context"
 
 const App =  () => {
   return (
-    <ContextProvider >
-      <Navigator />
-    </ContextProvider>
+    <>
+      <Header />
+      <ContextProvider >
+        <Navigator />
+      </ContextProvider>
+    </>
   );
 };
 

@@ -8,15 +8,15 @@ function useIncome () {
 	}
 
 	const testInitIncome = () => {
-		setIncome({total : 912000, details : [{name : "Education", value : 912000}]})
+		setIncome({assignTotal : 912000, details : [{name : "Education", value : 912000}]})
 	}
 
 	useEffect(() => testInitIncome(), []);
 
 	const addIncome = (detail, changeSurplus) => {
-		const total = income.total + detail.value;
-		setIncome({ total : total, details : [detail, ...income.details]})
-		changeSurplus(total); 
+		const assignTotal = income.assignTotal + detail.value;
+		setIncome({ assignTotal : assignTotal, details : [detail, ...income.details]})
+		changeSurplus(assignTotal); 
 	}
 	
 	const modIncome = (detail, changeSurplus) => {
@@ -26,9 +26,9 @@ function useIncome () {
 			else
 				return e;
 		});
-		const total = details.reduce((acc, cur) => acc + cur.value, 0);
-		setIncome({total : total, details : details});
-		changeSurplus(total); 
+		const assignTotal = details.reduce((acc, cur) => acc + cur.value, 0);
+		setIncome({assignTotal : assignTotal, details : details});
+		changeSurplus(assignTotal); 
 	}	
 
 	return [ income, addIncome, modIncome ];

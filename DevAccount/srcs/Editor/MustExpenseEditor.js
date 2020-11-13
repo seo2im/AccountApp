@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { View, Button, TextInput } from 'react-native'
-import Horizontal from '../Component/HorizontalBox'
+import Horizontal from '../Component/Horizontal'
 
 import { Context } from '../Context/Context'
 
@@ -37,8 +37,8 @@ function MustExpenseEditor ({setEdit, name}) {
 				<styled.Title>횟수</styled.Title>
 				<styled.Input
 					keyboardType='number-pad'
-					onChangeText={text => {byCost = Number(text)}}
-					defaultValue={String(byCost)}/>
+					onChangeText={text => {count = Number(text)}}
+					defaultValue={String(count)}/>
 			</Horizontal>
 			<styled.Set onPress={()=> {
 				isEdit ? modMustExpense({name, byCost, count}, (expense) => changeSurplusAssign("mustExpense", expense))

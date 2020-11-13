@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { Fonts }  from './Fonts'
+import Fonts from './Fonts'
 
 const Box = styled.View`
 	background-color : white;
@@ -49,6 +49,32 @@ const SubBox = styled.View`
 	margin-bottom : 20px;
 `
 
+const EditButtonSmall = styled.TouchableOpacity`
+	border : 2px;
+	border-radius : 15px;
+
+	width : 60px;
+`
+
+const EditButtonBig = styled.TouchableOpacity`
+	width : 60px;
+	height : 40px;
+	background-color : white;
+
+	border : 2px;
+	border-radius : 15px;
+
+	position : absolute;
+	right : 0;
+	bottom : 0;
+`
+
+const EditButtonText = styled.Text`
+	font-family : ${Fonts.GongGothicM};
+	margin : auto;
+	font-size : 15px;
+`
+
 const SubText = styled.Text`
 	font-family : ${Fonts.GongGothicM};
 	font-size : 15px;
@@ -71,4 +97,5 @@ const ListText = styled.Text`
 `
 
 export { Box, BoxName, BoxValue, BoxTitle,
-			ViewContainer, Title, Value, SubBox, SubText, List, ListTitle, ListText};
+			ViewContainer, Title, Value, SubBox, SubText, List, ListTitle, ListText,
+			EditButtonBig, EditButtonSmall, EditButtonText };

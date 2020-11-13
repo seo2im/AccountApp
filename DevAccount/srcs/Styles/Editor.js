@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { Fonts }  from './Fonts'
+import Fonts from './Fonts'
 
 const EditContainer = styled.View`
 	width : 100%;

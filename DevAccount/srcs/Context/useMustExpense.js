@@ -38,14 +38,14 @@ function useMustExpense () {
 		changeSurplus(assignTotal);
 	}
 
-	const modMustExpense = ({name, byCost, count}, callback) => {
+	const modMustExpense = ({name, byCost, count}, changeSurplus) => {
 		const lists = mustExpense.lists.map(e => {
 			if (e.name === name)
 				return {...e, byCost : byCost, count : count, assignTotal : byCost * count, balance : byCost * count - e.useTotal}
 			else
 				return e;
 		})
-		const assignTotal = mustExpense.lists.reduce((acc, cur) => acc + cur.useTotal, 0);
+		const assignTotal = lists.reduce((acc, cur) => acc + cur.assignTotal, 0);
 		setMustExpense({...mustExpense, assignTotal : assignTotal, lists : lists});
 		changeSurplus(assignTotal);
 	}

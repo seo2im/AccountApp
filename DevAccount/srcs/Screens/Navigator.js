@@ -7,17 +7,9 @@ import MainView from "./MainView"
 
 import MustExpense from "./MustExpense"
 import MustExpenseItem from "./MustExpenseItem"
-import MustExpenseEditor from "../Editor/MustExpenseEditor"
-import MustExpenseItemEditor from '../Editor/MustExpenseItemEditor'
-
 import Income from "./Income"
-import IncomeEditor from "../Editor/IncomeEditor"
-
 import FixedExpense from "./FixedExpense"
-import FixedExpenseEditor from "../Editor/FixedExpenseEditor"
-
 import Surplus from "./Surplus"
-import SurplusEditor from "../Editor/SurplusEditor"
 
 const Stack = createStackNavigator();
 
@@ -31,8 +23,6 @@ function MustExpenseStack ({route}) {
 			initialRouteName={kind ? "MustExpenseItem" : "MustExpense"}>
 			<Stack.Screen name="MustExpense" component={MustExpense}/>
 			<Stack.Screen name="MustExpenseItem" component={MustExpenseItem} initialParams={{ kind }}/>
-			<Stack.Screen name="MustExpenseEditor" component={MustExpenseEditor} />
-			<Stack.Screen name="MustExpenseItemEditor" component={MustExpenseItemEditor} />
 		</Stack.Navigator>
 		
 	)

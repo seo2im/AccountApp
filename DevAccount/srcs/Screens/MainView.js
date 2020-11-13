@@ -37,7 +37,7 @@ function MainView ({navigation}) {
 				<MainBox name="저금" data={account}
 					link={() => {}}
 					margin={0}/>
-				<MainBox name="수입" data={income.total}
+				<MainBox name="수입" data={income.assignTotal}
 					link={() => navigation.navigate("Income")}
 					margin={30}/>
 				<MainBox name="고정 지출" data={fixedExpense.total}
