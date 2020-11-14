@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 function useIncome () {
 	const [ income, setIncome ] = useState({ total : 0, details : []});
 
-	const initIncome = async () => {
+	const loadIncome = async () => {
 		//await getData('income', setIncome);
 	}
 

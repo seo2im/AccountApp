@@ -16,11 +16,16 @@ export const BigText = styled.Text`
 	font-size : 30px;
 `
 
+export const MainView = styled.View`
+	margin : 20px 0;
+
+`
+
 export const Box = styled.View`
 	background-color : white;
 	border-radius : 10px;
 	padding : 15px 25px 15px 25px;
-	margin : 25px 15px 0 15px;
+	margin : 15px
 	elevation : 10;
 `
 

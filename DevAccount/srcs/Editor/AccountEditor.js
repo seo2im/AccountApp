@@ -1,27 +1,35 @@
 import React, { useContext } from 'react'
-import { View, Text, Button, TextInput } from 'react-native'
+import Horizontal from '../Component/Horizontal'
 
 import { Context } from '../Context/Context'
 
-function AccountSetter () {
+import * as styled from '../Styles/Editor'
+
+function AccountEditor ({ setEdit }) {
 	const {
 		account,
 		modAccount
 	} = useContext(Context);
 
-	let changedAccount = account;
+	let value = account;
 
 	return (
-		<View>
-			<Text>Account : {account}</Text>
-			<TextInput
-				  style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-				  keyboardType='number-pad'
-      			onChangeText={text => {changedAccount = Number(text)}}
-    		/>
-			<Button title="setAccount" onPress={()=> modAccount(changedAccount)}/>
-		</View>
+		<styled.EditContainer>
+			<Horizontal space={false}>
+				<styled.Title>액수</styled.Title>
+				<styled.Input
+					keyboardType='number-pad'
+      				onChangeText={text => {value = Number(text)}}
+      				defaultValue={String(value)}/>
+			</Horizontal>
+			<styled.Set onPress={()=> {
+				modAccount(value);
+				setEdit(false);
+			}}>
+				<styled.Text>수정</styled.Text>
+			</styled.Set>
+		</styled.EditContainer>
 	)
 }
 
-export default AccountSetter;
+export default AccountEditor;

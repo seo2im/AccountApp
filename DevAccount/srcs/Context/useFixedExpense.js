@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 function useFixedExpense() {
 	const [ fixedExpense, setFixedExpense ] = useState({ total : 0, details : []});
 
-	const initFixedExpense = async () => {
+	const loadFixedExpense = async () => {
 		//await getData('fixedExpense', setFixedExpense);
 	}
 

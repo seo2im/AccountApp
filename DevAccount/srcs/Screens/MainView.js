@@ -6,6 +6,8 @@ import { Context } from '../Context/Context'
 import MainItem from '../Component/MainItem'
 import MainList from '../Component/MainList'
 import MainBox from '../Component/MainBox'
+import Editor from '../Component/Editor'
+import AccountEditor from '../Editor/AccountEditor'
 
 import * as styled from "../Styles/Basic"
 
@@ -18,7 +20,7 @@ function MainView ({navigation}) {
 		surplus,
 	} = useContext(Context)
 
-	const [visible, setVisible ]= useState(false);
+	const [edit, setEdit ]= useState(false);
 
 	return (
 		<>
@@ -35,7 +37,7 @@ function MainView ({navigation}) {
 			</styled.BoxTitle>
 			<styled.Box style={{marginTop : 3}}>
 				<MainBox name="저금" data={account}
-					link={() => {}}
+					link={() => setEdit(true)}
 					margin={0}/>
 				<MainBox name="수입" data={income.assignTotal}
 					link={() => navigation.navigate("Income")}
@@ -43,6 +45,9 @@ function MainView ({navigation}) {
 				<MainBox name="고정 지출" data={fixedExpense.total}
 					link={() => navigation.navigate("FixedExpense")}
 					margin={30}/>
+				<Editor visible={edit} setVisible={setEdit}>
+					<AccountEditor setEdit={setEdit}/>
+				</Editor>
 			</styled.Box>
 		</>
 	)

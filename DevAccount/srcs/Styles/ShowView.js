@@ -41,7 +41,8 @@ export const ListText = styled(Basic.SmallText)`
 export const EditButton = styled(Basic.Click)`
 	width : 60px;
 	
-	border : 2px;
+	background-color : white;
+	elevation : 20;
 	border-radius : 15px;
 `
 
