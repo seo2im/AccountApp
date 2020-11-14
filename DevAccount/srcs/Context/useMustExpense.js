@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 function useMustExpense () {
 	const [ mustExpense, setMustExpense ] = useState({ assignTotal : 0, useTotal : 0, lists : []});
 
-	const initMustExpense = async () => {
+	const loadMustExpense = async () => {
 		//await getData('mustExpense', setMustExpense);
 	}
 
@@ -30,6 +30,15 @@ function useMustExpense () {
 	}
 
 	useEffect(() => testInitMustExpense(), []);
+
+	const initMustExpense = () => {
+		const lists = mustExpense.lists.map(e => {
+			return {
+				...e, useTotal : 0, details : [], balance : e.assignTotal
+			}
+		})
+		setMustExpense({...mustExpense, useTotal : 0, lists : lists});
+	}
 
 	const addMustExpense = ({name, byCost, count}, changeSurplus) => {
 		const lists = [...mustExpense.lists, { name, byCost, count, assignTotal : byCost * count, useTotal : 0, details : [], balance : byCost * count}]
@@ -81,7 +90,7 @@ function useMustExpense () {
 		setMustExpense({...mustExpense, useTotal : mustExpense.lists.reduce((acc, cur) => acc + cur.useTotal, 0), lists : lists});
 	}
 
-	return [mustExpense, addMustExpense, modMustExpense, addMustExpenseItem, modMustExpenseItem ];
+	return [mustExpense, addMustExpense, modMustExpense, addMustExpenseItem, modMustExpenseItem, initMustExpense ];
 }
 
 export default useMustExpense;

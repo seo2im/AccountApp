@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react'
-import { Modal, Button, Text } from 'react-native'
+import { Button } from 'react-native'
 
 import { Context } from '../Context/Context'
+import { NextMonth } from '../function/utils'
 
 import MainItem from '../Component/MainItem'
 import MainList from '../Component/MainList'
@@ -13,11 +14,11 @@ import * as styled from "../Styles/Basic"
 
 function MainView ({navigation}) {
 	const {
-		account,
+		account, modAccount,
 		income,
 		fixedExpense,
-		mustExpense,
-		surplus,
+		mustExpense, initMustExpense,
+		surplus, initSurplus
 	} = useContext(Context)
 
 	const [edit, setEdit ]= useState(false);
@@ -49,6 +50,7 @@ function MainView ({navigation}) {
 					<AccountEditor setEdit={setEdit}/>
 				</Editor>
 			</styled.Box>
+			<Button title="test" onPress={() => NextMonth({account, modAccount, surplus, initSurplus, mustExpense, initMustExpense})}/>
 		</>
 	)
 }

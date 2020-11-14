@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 function useSurplus() {
 	const [ surplus, setSurplus ] = useState({ assignTotal : 0, useTotal : 0, details : []});
 
-	const initSurplus = async () => {
+	const loadSurplus = async () => {
 		//await getData('fixedExpense', setFixedExpense);
 	}
 
@@ -15,6 +15,10 @@ function useSurplus() {
 	}
 
 	useEffect(() => testInitSurplus(), []);
+
+	const initSurplus = () => {
+		setSurplus({...surplus, useTotal : 0, details : []})
+	}
 
 	const changeSurplusAssign = (kind, value) => {
 		switch (kind) {
@@ -46,7 +50,7 @@ function useSurplus() {
 		setSurplus({...surplus, useTotal : useTotal, details : details})
 	}
 
-	return [surplus, changeSurplusAssign, addSurplus, modSurplus]
+	return [surplus, changeSurplusAssign, addSurplus, modSurplus, initSurplus]
 }
 
 export default useSurplus;
