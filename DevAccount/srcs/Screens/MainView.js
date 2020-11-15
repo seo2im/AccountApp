@@ -47,7 +47,7 @@ function MainView ({navigation}) {
 				<MainBox name="수입" data={income.assignTotal}
 					link={() => navigation.navigate("Income")}
 					margin={30}/>
-				<MainBox name="고정 지출" data={fixedExpense.total}
+				<MainBox name="고정 지출" data={fixedExpense.assignTotal}
 					link={() => navigation.navigate("FixedExpense")}
 					margin={30}/>
 				<Editor visible={edit} setVisible={setEdit}>

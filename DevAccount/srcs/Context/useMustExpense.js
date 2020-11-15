@@ -1,35 +1,17 @@
 import { useState, useEffect } from 'react'
+import * as storage from './Storage'
+
 
 function useMustExpense () {
 	const [ mustExpense, setMustExpense ] = useState({ assignTotal : 0, useTotal : 0, lists : []});
 
 	const loadMustExpense = async () => {
-		//await getData('mustExpense', setMustExpense);
+		await storage.getData('mustExpense', setMustExpense);
 	}
 
-	const testInitMustExpense = () => {
-		setMustExpense({assignTotal : 96000, useTotal : 20000,
-			lists : [{
-				name : "Coffee",
-				assignTotal : 65600,
-				byCost : 4100,
-				count : 16,
-				useTotal : 20000,
-				details : [{id : 1, name : "StarBucks", date : "20201105", value : 10000},
-							{id : 0, name : "StarBucks", date : "20201101", value : 10000}],
-				balance : 45600
-			},{
-				name : "교통",
-				assignTotal : 26400,
-				byCost : 3300,
-				count : 8,
-				useTotal : 10000,
-				details : [{id : 0, name : "Card", date : "20201101", value : 10000}],
-				balance : 16400
-			}]});
-	}
-
-	useEffect(() => testInitMustExpense(), []);
+	useEffect(() => {
+		loadMustExpense();
+	}, []);
 
 	const initMustExpense = () => {
 		const lists = mustExpense.lists.map(e => {
@@ -37,13 +19,17 @@ function useMustExpense () {
 				...e, useTotal : 0, details : [], balance : e.assignTotal
 			}
 		})
-		setMustExpense({...mustExpense, useTotal : 0, lists : lists});
+		const newMustExpense = {...mustExpense, useTotal : 0, lists : lists}
+		setMustExpense(newMustExpense);
+		storage.setData('mustExpense', newMustExpense);
 	}
 
 	const addMustExpense = ({name, byCost, count}, changeSurplus) => {
 		const lists = [...mustExpense.lists, { name, byCost, count, assignTotal : byCost * count, useTotal : 0, details : [], balance : byCost * count}]
-		const assignTotal = mustExpense.assignTotal + byCost * count;
-		setMustExpense({...mustExpense, assignTotal : assignTotal, lists : lists});
+		const assignTotal = mustExpense.assignTotal + byCost * count;		
+		const newMustExpense = {...mustExpense, assignTotal : assignTotal, lists : lists};
+		setMustExpense(newMustExpense);
+		storage.setData('mustExpense', newMustExpense);
 		changeSurplus(assignTotal);
 	}
 
@@ -55,7 +41,9 @@ function useMustExpense () {
 				return e;
 		})
 		const assignTotal = lists.reduce((acc, cur) => acc + cur.assignTotal, 0);
-		setMustExpense({...mustExpense, assignTotal : assignTotal, lists : lists});
+		const newMustExpense = {...mustExpense, assignTotal : assignTotal, lists : lists};
+		setMustExpense(newMustExpense);
+		storage.setData('mustExpense', newMustExpense);
 		changeSurplus(assignTotal);
 	}
 
@@ -69,7 +57,9 @@ function useMustExpense () {
 			else
 				return e;
 		})
-		setMustExpense({...mustExpense, useTotal : mustExpense.useTotal + value, lists : lists});
+		const newMustExpense = {...mustExpense, useTotal : mustExpense.useTotal + value, lists : lists};
+		setMustExpense(newMustExpense);
+		storage.setData('mustExpense', newMustExpense);
 	}
 
 	const modMustExpenseItem = ({kind, id, name, date, value}) => {
@@ -87,7 +77,9 @@ function useMustExpense () {
 			else
 				return e;
 		})
-		setMustExpense({...mustExpense, useTotal : mustExpense.lists.reduce((acc, cur) => acc + cur.useTotal, 0), lists : lists});
+		const newMustExpense = {...mustExpense, useTotal : mustExpense.lists.reduce((acc, cur) => acc + cur.useTotal, 0), lists : lists};
+		setMustExpense(newMustExpense);
+		storage.setData('mustExpense', newMustExpense);
 	}
 
 	return [mustExpense, addMustExpense, modMustExpense, addMustExpenseItem, modMustExpenseItem, initMustExpense ];

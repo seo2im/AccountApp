@@ -22,7 +22,7 @@ function ShowView ({title, setVisible, data, listPress}) {
 			<List lists={details} date
 				onPress={listPress} />
 			<styled.AddButton
-				onPress={() => listPress( useTotal ? -1 : "")}>
+				onPress={() => listPress( useTotal !== undefined ? -1 : "")}>
 				<styled.ButtonText>추가</styled.ButtonText>
 			</styled.AddButton>
 		</>

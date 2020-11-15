@@ -1,27 +1,23 @@
 import { useState, useEffect } from 'react'
+import * as storage from './Storage'
 
 function useFixedExpense() {
-	const [ fixedExpense, setFixedExpense ] = useState({ total : 0, details : []});
+	const [ fixedExpense, setFixedExpense ] = useState({ assignTotal : 0, details : []});
 
 	const loadFixedExpense = async () => {
-		//await getData('fixedExpense', setFixedExpense);
+		await storage.getData('fixedExpense', setFixedExpense);
 	}
 
-	const testInitFixedExpense = () => {
-		setFixedExpense({total : 422650,
-			details : [{name : "생활비", value : 150000},
-						{name : "할부", value : 140000},
-						{name : "Adobe", value : 23100},
-						{name : "Phone" , value : 89550},
-						{name : "청약", value : 20000}]})
-	}
-
-	useEffect(() => testInitFixedExpense(), []);
+	useEffect(() => { 
+		loadFixedExpense();
+	}, []);
 
 	const addFixedExpense = (detail, changeSurplus) => {
-		const total = fixedExpense.total + detail.value;
-		setFixedExpense({ total : total, details : [detail, ...fixedExpense.details]})
-		changeSurplus(total); 
+		const assignTotal = fixedExpense.assignTotal + detail.value;
+		const newFixedExpense = { assignTotal : assignTotal, details : [detail, ...fixedExpense.details]};
+		setFixedExpense(newFixedExpense);
+		storage.setData("fixedExpense", newFixedExpense);
+		changeSurplus(assignTotal);
 	}
 
 	const modFixedExpense = (detail, changeSurplus) => {
@@ -31,9 +27,11 @@ function useFixedExpense() {
 			else
 				return e;
 		});
-		const total = details.reduce((acc, cur) => acc + cur.value, 0);
-		setFixedExpense({total : total, details : details});
-		changeSurplus(total); 
+		const assignTotal = details.reduce((acc, cur) => acc + cur.value, 0);
+		const newFixedExpense = {assignTotal : assignTotal, details : details};
+		setFixedExpense(newFixedExpense);
+		storage.setData('fixedExpense', newFixedExpense);
+		changeSurplus(assignTotal); 
 	}
 
 	return [ fixedExpense, addFixedExpense, modFixedExpense ];

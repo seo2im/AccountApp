@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react'
+import * as storage from './Storage'
 
 function useAccount () {
-	const [ account, setAccount ] = useState(5);
+	const [ account, setAccount ] = useState(0);
 
-	const initAccount = async () => {
-		//await getData('account', setAccount);
+	const loadAccount = async () => {
+		await storage.getData('account', setAccount);
 	}
 
-	const testInitAccount = () => {
-		setAccount(5000);
-	}
-
-	useEffect(() => testInitAccount(), []);
+	useEffect(() => {
+		loadAccount()
+	}, []);
 
 	const modAccount = (value) => {
 		setAccount(value);
+		storage.setData("account", value);
 	}
 	
 	return [ account, modAccount ];

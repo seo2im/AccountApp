@@ -1,42 +1,46 @@
 import { useState, useEffect } from 'react';
+import * as storage from './Storage'
 
 function useSurplus() {
-	const [ surplus, setSurplus ] = useState({ assignTotal : 0, useTotal : 0, details : []});
+	const [ surplus, setSurplus ] = useState({income : 0, fixedExpense : 0, mustExpense : 0, assignTotal : 0, useTotal : 0, details : []});
 
 	const loadSurplus = async () => {
-		//await getData('fixedExpense', setFixedExpense);
+		await storage.getData('surplus', setSurplus);
 	}
 
-	const testInitSurplus = () => {
-		setSurplus({income : 912000, fixedExpense : 422650, mustExpense : 96000, assignTotal : 393350, useTotal : 10000,
-					details : [{id : 2, name : "jam", date : "20.11.08", value : 2000},
-								{id : 1, name : "jam2", date : "20.11.06", value : 4000},
-								{id : 0, name : "jam3", date : "20.11.02", value : 4000}]})
-	}
-
-	useEffect(() => testInitSurplus(), []);
+	useEffect(() => {
+		loadSurplus();
+	}, []);
 
 	const initSurplus = () => {
-		setSurplus({...surplus, useTotal : 0, details : []})
+		const newSurplus = {...surplus, useTotal : 0, details : []}
+		setSurplus(newSurplus);
+		storage.setData('surplus', newSurplus);
 	}
 
 	const changeSurplusAssign = (kind, value) => {
+		let newSurplus = {};
+
 		switch (kind) {
 			case "income" :
-				setSurplus({...surplus, income : value, assignTotal : value - surplus.fixedExpense - surplus.mustExpense})
+				newSurplus = {...surplus, income : value, assignTotal : value - surplus.fixedExpense - surplus.mustExpense};
 				break;
 			case "fixedExpense" :
-				setSurplus({...surplus, fixedExpense : value, assignTotal :  surplus.income - value - surplus.mustExpense})
+				newSurplus = {...surplus, fixedExpense : value, assignTotal :  surplus.income - value - surplus.mustExpense}
 				break;
 			case "mustExpense" :
-				setSurplus({...surplus, mustExpense : value, assignTotal :  surplus.income - surplus.fixedExpense - value})
+				newSurplus = {...surplus, mustExpense : value, assignTotal :  surplus.income - surplus.fixedExpense - value}
 		}
+		setSurplus(newSurplus);
+		storage.setData('surplus', newSurplus);
 	}
 
 	const addSurplus = ({name, date, value}) => {
 		const useTotal = surplus.useTotal + value;
 		const id = surplus.details.length;
-		setSurplus({...surplus, useTotal : useTotal, details : [{id, name, date, value}, ...surplus.details]})
+		const newSurplus = {...surplus, useTotal : useTotal, details : [{id, name, date, value}, ...surplus.details]}
+		setSurplus(newSurplus);
+		storage.setData('surplus', newSurplus);
 	}
 
 	const modSurplus = ({id, name, date, value}) => {
@@ -47,7 +51,9 @@ function useSurplus() {
 				return e;
 		})
 		const useTotal = details.reduce((acc, cur) => acc + cur.value, 0);
-		setSurplus({...surplus, useTotal : useTotal, details : details})
+		const newSurplus = {...surplus, useTotal : useTotal, details : details};
+		setSurplus(newSurplus);
+		storage.setData('surplus', newSurplus);
 	}
 
 	return [surplus, changeSurplusAssign, addSurplus, modSurplus, initSurplus]

@@ -1,22 +1,24 @@
 import { useState, useEffect } from 'react'
+import * as storage from './Storage'
+
 
 function useIncome () {
-	const [ income, setIncome ] = useState({ total : 0, details : []});
+	const [ income, setIncome ] = useState({ assignTotal : 0, details : []});
 
 	const loadIncome = async () => {
-		//await getData('income', setIncome);
+		await storage.getData('income', setIncome);
 	}
 
-	const testInitIncome = () => {
-		setIncome({assignTotal : 912000, details : [{name : "Education", value : 912000}]})
-	}
-
-	useEffect(() => testInitIncome(), []);
+	useEffect(() => {
+		loadIncome();
+	}, []);
 
 	const addIncome = (detail, changeSurplus) => {
 		const assignTotal = income.assignTotal + detail.value;
-		setIncome({ assignTotal : assignTotal, details : [detail, ...income.details]})
-		changeSurplus(assignTotal); 
+		const newIncome = { assignTotal : assignTotal, details : [detail, ...income.details]};
+		setIncome(newIncome);
+		storage.setData('income', newIncome);
+		changeSurplus(assignTotal);
 	}
 	
 	const modIncome = (detail, changeSurplus) => {
@@ -27,7 +29,9 @@ function useIncome () {
 				return e;
 		});
 		const assignTotal = details.reduce((acc, cur) => acc + cur.value, 0);
-		setIncome({assignTotal : assignTotal, details : details});
+		const newIncome = {assignTotal : assignTotal, details : details}
+		setIncome(newIncome);
+		storage.setData('income', newIncome);
 		changeSurplus(assignTotal); 
 	}	
 
