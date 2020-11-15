@@ -4,7 +4,6 @@ import * as styled from '../Styles/ShowView'
 import Horizontal from './Horizontal'
 
 function ShowTitle ({name, setVisible, value}) {
-	console.log(setVisible)
 
 	return (
 		<>

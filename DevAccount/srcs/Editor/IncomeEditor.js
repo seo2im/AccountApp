@@ -10,6 +10,7 @@ function IncomeEditor ({setEdit, name}) {
 		income,
 		addIncome,
 		modIncome,
+		removeIncome,
 		changeSurplusAssign
 	} = useContext(Context);
 
@@ -31,13 +32,26 @@ function IncomeEditor ({setEdit, name}) {
       				onChangeText={text => {value = Number(text)}}
       				defaultValue={String(value)}/>
 			</Horizontal>
+			{isEdit ?
+			<Horizontal>
+				<styled.Set onPress={()=> {
+					modIncome({name, value}, (income) => changeSurplusAssign("income", income));
+					setEdit(false);}}>
+					<styled.Text>수정</styled.Text>
+				</styled.Set>
+				<styled.Set onPress={()=> {
+					removeIncome({name, value}, (income) => changeSurplusAssign("income", income));
+					setEdit(false);}}>
+					<styled.Text>삭제</styled.Text>
+				</styled.Set>
+			</Horizontal> 
+			:
 			<styled.Set onPress={()=> {
-				isEdit ? modIncome({name, value}, (income) => changeSurplusAssign("income", income))
-						: addIncome({name, value}, (income) => changeSurplusAssign("income", income));
-				setEdit(false);
-			}}>
+				addIncome({name, value}, (income) => changeSurplusAssign("income", income));
+				setEdit(false);}}>
 				<styled.Text>추가</styled.Text>
 			</styled.Set>
+			}
 		</styled.EditContainer>
 	)
 }

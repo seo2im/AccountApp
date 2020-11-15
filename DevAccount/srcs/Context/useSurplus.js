@@ -56,7 +56,15 @@ function useSurplus() {
 		storage.setData('surplus', newSurplus);
 	}
 
-	return [surplus, changeSurplusAssign, addSurplus, modSurplus, initSurplus]
+	const removeSurplus = ({id}) => {
+		const details = surplus.details.filter(e => e.id !== id);
+		const useTotal = details.reduce((acc, cur) => acc + cur.value, 0);
+		const newSurplus = {...surplus, useTotal : useTotal, details : details};
+		setSurplus(newSurplus);
+		storage.setData('surplus', newSurplus);
+	}
+
+	return [surplus, changeSurplusAssign, addSurplus, modSurplus, removeSurplus, initSurplus]
 }
 
 export default useSurplus;

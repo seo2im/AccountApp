@@ -34,7 +34,16 @@ function useFixedExpense() {
 		changeSurplus(assignTotal); 
 	}
 
-	return [ fixedExpense, addFixedExpense, modFixedExpense ];
+	const removeFixedExpense = (detail, changeSurplus) => {
+		const details = fixedExpense.details.filter(e => e.name !== detail.name);
+		const assignTotal = details.reduce((acc, cur) => acc + cur.value, 0);
+		const newFixedExpense = {assignTotal : assignTotal, details : details};
+		setFixedExpense(newFixedExpense);
+		storage.setData('fixedExpense', newFixedExpense);
+		changeSurplus(assignTotal); 
+	}
+
+	return [ fixedExpense, addFixedExpense, modFixedExpense, removeFixedExpense ];
 }
 
 export default useFixedExpense;

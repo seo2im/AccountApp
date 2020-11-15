@@ -10,6 +10,7 @@ function FixedExpenseEditor ({ setEdit, name}) {
 		fixedExpense,
 		addFixedExpense,
 		modFixedExpense,
+		removeFixedExpense,
 		changeSurplusAssign
 	} = useContext(Context);
 
@@ -31,13 +32,26 @@ function FixedExpenseEditor ({ setEdit, name}) {
       				onChangeText={text => {value = Number(text)}}
       				defaultValue={String(value)}/>
 			</Horizontal>
+			{isEdit ? 
+			<Horizontal>
+				<styled.Set onPress={()=> {
+					modFixedExpense({name, value}, (expense) => changeSurplusAssign("fixedExpense", expense))
+					setEdit(false);}}>
+					<styled.Text>수정</styled.Text>
+				</styled.Set>
+				<styled.Set onPress={()=> {
+					removeFixedExpense({name, value}, (expense) => changeSurplusAssign("fixedExpense", expense))
+					setEdit(false);}}>
+					<styled.Text>삭제</styled.Text>
+				</styled.Set>
+			</Horizontal>
+			:
 			<styled.Set onPress={()=> {
-				isEdit ? modFixedExpense({name, value}, (expense) => changeSurplusAssign("fixedExpense", expense))
-				: addFixedExpense({name, value}, (expense) => changeSurplusAssign("fixedExpense", expense));
-				setEdit(false);
-			}}>
+				addFixedExpense({name, value}, (expense) => changeSurplusAssign("fixedExpense", expense));
+				setEdit(false);}}>
 				<styled.Text>추가</styled.Text>
 			</styled.Set>
+			}
 		</styled.EditContainer>
 	)
 }

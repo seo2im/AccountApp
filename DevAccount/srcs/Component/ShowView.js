@@ -19,7 +19,7 @@ function ShowView ({title, setVisible, data, listPress}) {
 				<Sider title="사용액" value={`${useTotal} 원`} />
 			</styled.SubBox> : null}
 			<styled.SubText>내역</styled.SubText>
-			<List lists={details} date
+			<List lists={details} date={useTotal !== undefined ? true : false}
 				onPress={listPress} />
 			<styled.AddButton
 				onPress={() => listPress( useTotal !== undefined ? -1 : "")}>

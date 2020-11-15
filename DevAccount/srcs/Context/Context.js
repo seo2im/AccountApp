@@ -31,18 +31,18 @@ const Context = createContext({
 function ContextProvider ({ children }) {
 	
 	const [ account, modAccount ] = useAccount(); 
-	const [ income, addIncome, modIncome ] = useIncome();
-	const [ fixedExpense, addFixedExpense, modFixedExpense] = useFixedExpense();
-	const [ surplus, changeSurplusAssign, addSurplus, modSurplus, initSurplus ] = useSurplus();
-	const [ mustExpense, addMustExpense, modMustExpense, addMustExpenseItem, modMustExpenseItem, initMustExpense ] = useMustExpense();
+	const [ income, addIncome, modIncome, removeIncome ] = useIncome();
+	const [ fixedExpense, addFixedExpense, modFixedExpense, removeFixedExpense ] = useFixedExpense();
+	const [ surplus, changeSurplusAssign, addSurplus, modSurplus, removeSurplus ,initSurplus ] = useSurplus();
+	const [ mustExpense, addMustExpense, modMustExpense, removeMustExpense, addMustExpenseItem, modMustExpenseItem, removeMustExpenseItem, initMustExpense ] = useMustExpense();
 
 	return (
 		<Context.Provider value={{
 			account, modAccount,
-			income, addIncome, modIncome,
-			fixedExpense, addFixedExpense, modFixedExpense,
-			surplus, changeSurplusAssign, addSurplus, modSurplus, initSurplus,
-			mustExpense, addMustExpense, modMustExpense, addMustExpenseItem, modMustExpenseItem, initMustExpense
+			income, addIncome, modIncome, removeIncome,
+			fixedExpense, addFixedExpense, modFixedExpense, removeFixedExpense,
+			surplus, changeSurplusAssign, addSurplus, modSurplus, removeSurplus, initSurplus,
+			mustExpense, addMustExpense, modMustExpense, removeMustExpense ,addMustExpenseItem, modMustExpenseItem, removeMustExpenseItem, initMustExpense
 		}}>
 			{children}
 		</Context.Provider>

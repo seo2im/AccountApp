@@ -47,6 +47,15 @@ function useMustExpense () {
 		changeSurplus(assignTotal);
 	}
 
+	const removeMustExpense = ({name},  changeSurplus) => {
+		const lists = mustExpense.lists.filter(e => e.name !== name);
+		const assignTotal = lists.reduce((acc, cur) => acc + cur.assignTotal, 0);
+		const newMustExpense = {...mustExpense, assignTotal : assignTotal, lists : lists};
+		setMustExpense(newMustExpense);
+		storage.setData('mustExpense', newMustExpense);
+		changeSurplus(assignTotal);
+	}
+
 	const addMustExpenseItem = ({kind, name, date, value}) => {
 		const lists = mustExpense.lists.map(e => {
 			if (e.name === kind) {
@@ -82,7 +91,22 @@ function useMustExpense () {
 		storage.setData('mustExpense', newMustExpense);
 	}
 
-	return [mustExpense, addMustExpense, modMustExpense, addMustExpenseItem, modMustExpenseItem, initMustExpense ];
+	const removeMustExpenseItem = ({kind, id}) => {
+		const lists = mustExpense.lists.map(e => {
+			if (e.name === kind) {
+				const details = e.details.filter(d => d.id !== id);
+				const useTotal = details.reduce((acc, cur) => acc + cur.value, 0);
+				return {...e, useTotal : useTotal, details : details, balance : e.assignTotal - useTotal};
+			}
+			else
+				return e;
+		})
+		const newMustExpense = {...mustExpense, useTotal : mustExpense.lists.reduce((acc, cur) => acc + cur.useTotal, 0), lists : lists};
+		setMustExpense(newMustExpense);
+		storage.setData('mustExpense', newMustExpense);
+	}
+
+	return [mustExpense, addMustExpense, modMustExpense, removeMustExpense ,addMustExpenseItem, modMustExpenseItem, removeMustExpenseItem, initMustExpense ];
 }
 
 export default useMustExpense;

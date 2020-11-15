@@ -6,6 +6,7 @@ import Sider from '../Component/Sider'
 import * as styled from '../Styles/ShowView'
 
 function List ({lists, onPress, date}) {
+
 	return (
 		<FlatList
 				data={lists}

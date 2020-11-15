@@ -10,7 +10,8 @@ function MustExpenseItemEditor ({setEdit, kind, id}) {
 	const {
 		mustExpense,
 		addMustExpenseItem,
-		modMustExpenseItem
+		modMustExpenseItem,
+		removeMustExpenseItem
 	} = useContext(Context);
 
 	const item = mustExpense.lists.find(e => e.name === kind);
@@ -35,12 +36,26 @@ function MustExpenseItemEditor ({setEdit, kind, id}) {
 					onChangeText={text => {value = Number(text)}}
 					defaultValue={String(value)}/>
 			</Horizontal>
+			{isEdit ?
+			<Horizontal>
+				<styled.Set onPress={()=> {
+					modMustExpenseItem({kind, id, name, date, value});
+					setEdit(false);}}>
+					<styled.Text>수정</styled.Text>
+				</styled.Set>
+				<styled.Set onPress={()=> {
+					removeMustExpenseItem({kind, id});
+					setEdit(false);}}>
+					<styled.Text>삭제</styled.Text>
+				</styled.Set>
+			</Horizontal> 
+			:
 			<styled.Set onPress={()=> {
-				isEdit ? modMustExpenseItem({kind, id, name, date, value})
-				: addMustExpenseItem({kind, name, date, value});
+				addMustExpenseItem({kind, name, date, value});
 				setEdit(false);}}>
 				<styled.Text>추가</styled.Text>
 			</styled.Set>
+			}
 		</styled.EditContainer>
 	)
 }

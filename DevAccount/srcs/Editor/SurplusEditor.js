@@ -9,7 +9,8 @@ function SurplusEditor ({setEdit, id}) {
 	const {
 		surplus,
 		addSurplus,
-		modSurplus
+		modSurplus,
+		removeSurplus
 	} = useContext(Context);
 
 	const isEdit = id !== -1 ? true : false;
@@ -33,13 +34,27 @@ function SurplusEditor ({setEdit, id}) {
       				onChangeText={text => {value = Number(text)}}
       				defaultValue={String(value)}/>
 			</Horizontal>
+			{isEdit ?
+			<Horizontal>
+				<styled.Set onPress={()=> {
+					modSurplus({id, name, date, value});
+					setEdit(false);}}>
+					<styled.Text>수정</styled.Text>
+				</styled.Set>
+				<styled.Set onPress={()=> {
+					removeSurplus({id})
+					setEdit(false);}}>
+					<styled.Text>삭제</styled.Text>
+				</styled.Set>
+			</Horizontal> 
+			:
 			<styled.Set onPress={()=> {
-				isEdit ? modSurplus({id, name, date, value})
-				: addSurplus({name, date, value});
+				addSurplus({name, date, value});
 				setEdit(false);
 			}}>
 				<styled.Text>추가</styled.Text>
 			</styled.Set>
+			}
 		</styled.EditContainer>
 	)
 }

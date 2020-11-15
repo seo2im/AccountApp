@@ -7,8 +7,6 @@ import Header from './Component/Header'
 import { ContextProvider } from "./Context/Context"
 
 const App =  () => {
-  storage.initData();
-
   return (
     <>
       <Header />

@@ -32,10 +32,19 @@ function useIncome () {
 		const newIncome = {assignTotal : assignTotal, details : details}
 		setIncome(newIncome);
 		storage.setData('income', newIncome);
-		changeSurplus(assignTotal); 
-	}	
+		changeSurplus(assignTotal);
+	}
 
-	return [ income, addIncome, modIncome ];
+	const removeIncome = (detail, changeSurplus) => {
+		const details = income.details.filter(e => e.name !== detail.name);
+		const assignTotal = details.reduce((acc, cur) => acc + cur.value, 0);
+		const newIncome = {assignTotal : assignTotal, details : details}
+		setIncome(newIncome);
+		storage.setData('income', newIncome);
+		changeSurplus(assignTotal);
+	}
+
+	return [ income, addIncome, modIncome, removeIncome ];
 }
 
 export default useIncome;
