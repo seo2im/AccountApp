@@ -35,7 +35,7 @@ function MustExpenseItemEditor ({setEdit, kind, id}) {
 					defaultValue={String(value)}/>
 			</Horizontal>
 			{isEdit ?
-			<Horizontal>
+			<Horizontal space={true}>
 				<styled.Set onPress={()=> {
 					modMustExpenseItem({kind, id, name, date, value});
 					setEdit(false);}}>

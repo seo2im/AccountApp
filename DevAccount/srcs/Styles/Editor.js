@@ -37,11 +37,13 @@ const Input = styled.TextInput`
 ` 
 
 const Set = styled.TouchableOpacity`
+	width : 100px;
 	border-radius : 30px;
 	border-width : 3px;
 	background-color : white;
+	margin : auto;
+	margin-top : 20px;
 	padding : 5px;
-	margin : 50px 70px 0 70px;
 `
 
 export { EditContainer, Input, Set, Text, Title }
