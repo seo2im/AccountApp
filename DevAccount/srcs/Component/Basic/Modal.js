@@ -1,17 +1,16 @@
 import React from 'react'
-import { Modal } from 'react-native'
+import Native from 'react-native'
 
-
-function Editor ({children, visible, setVisible}) {
+function Modal ({children, visible, setVisible}) {
 	return (
-		<Modal 
+		<Native.Modal 
 				animationType="slide"
 				transparent={true}
 				visible={visible}
 				onRequestClose={() => setVisible(false)}>
 				{children}
-		</Modal>
+		</Native.Modal>
 	)
 }
 
-export default Editor;
+export default Modal;

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
-import SurplusEditor from '../Editor/SurplusEditor'
-import Editor from '../Component/Editor'
-import ShowView from '../Component/ShowView'
 
-import { Context } from '../Context/Context'
-import * as styled from '../Styles/ShowView'
+import SurplusEditor from '~/srcs/Editor/SurplusEditor'
+import { ShowView, Modal } from '~/srcs/Component'
+
+import { Context } from '~/srcs/Context/Context'
+import * as styled from '~/srcs/Styles/ShowView'
 
 function SurplusView () {
 	const surplus = useContext(Context).surplus;
@@ -16,9 +16,9 @@ function SurplusView () {
 			<ShowView title="여유금" 
 				data={surplus}
 				listPress={(id) => {setId(id);setEdit(true)}}/>
-			<Editor visible={edit} setVisible={setEdit}>
+			<Modal visible={edit} setVisible={setEdit}>
 				<SurplusEditor setEdit={setEdit} id={id}/>
-			</Editor>
+			</Modal>
 		</styled.ShowView>
 	)
 }

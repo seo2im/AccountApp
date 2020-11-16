@@ -1,13 +1,13 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 
-import * as styled from "../Styles/Basic"
+import * as styled from "~/srcs/Styles/Box"
 
 function MainBox ({name, data, link, margin}) {
 	return (
 		<TouchableOpacity onPress={() => link()}
 			style={{marginTop : margin}}>
-			<styled.BoxName>{name}</styled.BoxName>
+			<styled.BoxTitle fontSize="15px">{name}</styled.BoxTitle>
 			<styled.BoxValue>{data} 원</styled.BoxValue>
 		</TouchableOpacity>
 	)

@@ -1,5 +1,5 @@
 import React from 'react'
-import * as styled from '../Styles/Basic_'
+import * as styled from '~/srcs/Styles/Basic_'
 
 function Horizontal ({children, space}) {
 	return (

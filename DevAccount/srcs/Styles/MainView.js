@@ -7,15 +7,23 @@ export const MainView = styled.View`
 	flex : 1;
 `
 
+export const Scroll = styled.ScrollView`
+	
+`
+
 export const Title = styled(Basic.BigText)`
 	margin-left : 25px;
-	margin-bottom : 15px;
+	margin-top : 15px;
 `
 export const Box = styled(Basic.Box)`
 `;
 
 export const BoxTitle = styled(Basic.BigText)`
 	margin-bottom : 10px;
+`
+
+export const BoxValue = styled(Basic.BigText)`
+	font-size : 25px;
 `
 
 export const AddButton = styled(Basic.Click)`

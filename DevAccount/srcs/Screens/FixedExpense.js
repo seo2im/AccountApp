@@ -1,9 +1,7 @@
 import React, { useContext, useState } from 'react'
 
-import FixedExpenseEditor from '../Editor/FixedExpenseEditor'
-import Editor from '../Component/Editor'
-import ShowView from '../Component/ShowView'
-
+import FixedExpenseEditor from '~/srcs/Editor/FixedExpenseEditor'
+import { ShowView, Modal } from '~/srcs/Component'
 import { Context } from '../Context/Context'
 import * as styled from '../Styles/ShowView'
 
@@ -17,9 +15,9 @@ function FixedExpense () {
 			<ShowView title="고정 지출"
 				data={fixedExpense}
 				listPress={(name) => {setName(name);setEdit(true)}}/>
-			<Editor visible={edit} setVisible={setEdit}>
+			<Modal visible={edit} setVisible={setEdit}>
 				<FixedExpenseEditor setEdit={setEdit} name={name}/>
-			</Editor>
+			</Modal>
 		</styled.ShowView>
 	)
 }

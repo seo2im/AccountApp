@@ -1,7 +1,7 @@
 import React from 'react'
-import Horizontal from './Horizontal'
 
-import * as styled from '../Styles/Editor'
+import { Horizontal } from '~/srcs/Component'
+import * as styled from '~/srcs/Styles/Editor'
 
 function Input ({title, value}) {
 	return (

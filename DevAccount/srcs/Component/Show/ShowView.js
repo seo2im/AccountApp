@@ -1,10 +1,7 @@
 import React from 'react'
 
-import ShowTitle from './ShowTitle'
-import Sider from './Sider'
-import List from './List'
-
-import * as styled from '../Styles/ShowView'
+import { ShowTitle, Sider, ItemList } from '~/srcs/Component'
+import * as styled from '~/srcs/Styles/ShowView'
 
 function ShowView ({title, setVisible, data, listPress}) {
 	const { assignTotal, useTotal, details } = data;
@@ -19,7 +16,7 @@ function ShowView ({title, setVisible, data, listPress}) {
 				<Sider title="사용액" value={`${useTotal} 원`} />
 			</styled.SubBox> : null}
 			<styled.SubText>내역</styled.SubText>
-			<List lists={details} date={useTotal !== undefined ? true : false}
+			<ItemList lists={details} date={useTotal !== undefined ? true : false}
 				onPress={listPress} />
 			<styled.AddButton
 				onPress={() => listPress( useTotal !== undefined ? -1 : "")}>

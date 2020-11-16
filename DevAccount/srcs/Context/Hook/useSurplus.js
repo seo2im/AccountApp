@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import * as storage from './Storage'
+import * as storage from '../Storage'
 
 function useSurplus() {
 	const [ surplus, setSurplus ] = useState({income : 0, fixedExpense : 0, mustExpense : 0, assignTotal : 0, useTotal : 0, details : []});

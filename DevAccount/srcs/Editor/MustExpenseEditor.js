@@ -1,10 +1,8 @@
 import React, { useContext } from 'react'
-import { View, Button, TextInput } from 'react-native'
-import Horizontal from '../Component/Horizontal'
 
-import { Context } from '../Context/Context'
-
-import * as styled from '../Styles/Editor'
+import { Horizontal } from '~/srcs/Component'
+import { Context } from '~/srcs/Context/Context'
+import * as styled from '~/srcs/Styles/Editor'
 
 function MustExpenseEditor ({setEdit, name}) {
 	const {

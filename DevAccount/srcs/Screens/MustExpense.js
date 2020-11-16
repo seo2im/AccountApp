@@ -1,14 +1,10 @@
 import React, { useContext, useState } from 'react'
-import { Modal, View, Text, Button, FlatList, TouchableOpacity } from 'react-native'
+import { FlatList } from 'react-native'
 
-import MustExpenseEditor from '../Editor/MustExpenseEditor'
-import Editor from '../Component/Editor'
-import Sider from '../Component/Sider'
-import Horizontal from '../Component/Horizontal'
-
-import { Context } from '../Context/Context'
-import * as styled from '../Styles/MainView'
-import { EditButton } from '../Styles/ShowView'
+import MustExpenseEditor from '~/srcs/Editor/MustExpenseEditor'
+import { TouchBox, Button, Modal, Sider } from '~/srcs/Component'
+import { Context } from '~/srcs/Context/Context'
+import * as styled from '~/srcs/Styles/MainView'
 
 function MustExpense ({navigation}) {
 	const { mustExpense, 
@@ -26,28 +22,22 @@ function MustExpense ({navigation}) {
 				data={lists}
 				keyExtractor={(item, index) => (`${index}_${item.name}`)}
 				renderItem={({item, index}) => (
-					<styled.Box>
-						<TouchableOpacity
-							onPress={() => navigation.navigate("MustExpenseItem", {kind : item.name})}>
-							<Horizontal space={true}>
-								<styled.BoxTitle>{item.name}</styled.BoxTitle>
-								<EditButton onPress={() => removeMustExpense({ name : item.name }, (expense) => changeSurplusAssign("mustExpense", expense))}>
-									<styled.ButtonText>삭제</styled.ButtonText>
-								</EditButton>
-							</Horizontal>
-							<Sider title="할당액" value={item.assignTotal}/>
-							<Sider title="사용액" value={item.useTotal}/>
-							<Sider title="잔여금" value={item.balance}/>
-						</TouchableOpacity>
-					</styled.Box>
+					<TouchBox title={item.name} fontSize="25px"
+						onPress={() => navigation.navigate("MustExpenseItem", {kind : item.name})}
+						button={<Button title="삭제" onPress={() => removeMustExpense({ name : item.name }, (expense) => changeSurplusAssign("mustExpense", expense))}/>}>
+						<Sider title="할당액" value={item.assignTotal}/>
+						<Sider title="사용액" value={item.useTotal}/>
+						<Sider title="잔여금" value={item.balance}/>
+					</TouchBox>
+					
 				)}
 			/>
 			<styled.AddButton onPress={() => {setName("");setEdit(true);}}>
 				<styled.ButtonText>추가</styled.ButtonText>
 			</styled.AddButton>
-			<Editor visible={edit} setVisible={setEdit}>
+			<Modal visible={edit} setVisible={setEdit}>
 				<MustExpenseEditor setEdit={setEdit} name={name}/>
-			</Editor>
+			</Modal>
 		</styled.MainView>
 	)
 }

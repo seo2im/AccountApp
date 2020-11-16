@@ -1,7 +1,7 @@
 import React from 'react'
 
-import * as styled from '../Styles/ShowView'
-import Horizontal from './Horizontal'
+import { Horizontal } from '~/srcs/Component'
+import * as styled from '~/srcs/Styles/ShowView'
 
 function ShowTitle ({name, setVisible, value}) {
 

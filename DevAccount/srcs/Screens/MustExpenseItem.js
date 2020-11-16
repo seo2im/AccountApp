@@ -2,11 +2,9 @@ import React, { useContext, useState } from 'react'
 
 import MustExpenseItemEditor from '../Editor/MustExpenseItemEditor'
 import MustExpenseEditor from '../Editor/MustExpenseEditor'
-import Editor from '../Component/Editor'
-import ShowView from '../Component/ShowView'
-
-import { Context } from '../Context/Context'
-import * as styled from '../Styles/ShowView'
+import { ShowView, Modal } from '~/srcs/Component'
+import { Context } from '~/srcs/Context/Context'
+import * as styled from '~/srcs/Styles/ShowView'
 
 function MustExpenseItem ({route}) {
 	const { kind } = route.params;
@@ -21,12 +19,12 @@ function MustExpenseItem ({route}) {
 				setVisible={setEdit}
 				data={item}
 				listPress={(id) => {setId(id);setItemEdit(true)}}/>
-			<Editor visible={itemEdit} setVisible={setItemEdit}>
+			<Modal visible={itemEdit} setVisible={setItemEdit}>
 				<MustExpenseItemEditor setEdit={setItemEdit} kind={kind} id={id}/>
-			</Editor>
-			<Editor visible={edit} setVisible={setEdit}>
+			</Modal>
+			<Modal visible={edit} setVisible={setEdit}>
 				<MustExpenseEditor setEdit={setEdit} name={kind}/>
-			</Editor>
+			</Modal>
 		</styled.ShowView>
 	)
 }

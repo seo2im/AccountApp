@@ -1,7 +1,7 @@
 import React from 'react'
-import Horizontal from './Horizontal'
 
-import * as styled from '../Styles/ShowView'
+import { Horizontal } from '~/srcs/Component'
+import * as styled from '~/srcs/Styles/ShowView'
 
 function Sider ({title, value}) {
 	return (

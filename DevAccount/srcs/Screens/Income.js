@@ -1,11 +1,10 @@
 import React, { useContext, useState } from 'react'
 
-import IncomeEditor from '../Editor/IncomeEditor'
-import Editor from '../Component/Editor'
-import ShowView from '../Component/ShowView'
+import IncomeEditor from '~/srcs/Editor/IncomeEditor'
+import { ShowView, Modal } from '~/srcs/Component'
 
-import { Context } from '../Context/Context'
-import * as styled from '../Styles/ShowView'
+import { Context } from '~/srcs/Context/Context'
+import * as styled from '~/srcs/Styles/ShowView'
 
 function Income () {
 	const { income } =  useContext(Context);
@@ -17,9 +16,9 @@ function Income () {
 			<ShowView title="수입"
 				data={income}
 				listPress={(name) => {setName(name);setEdit(true)}}/>
-			<Editor visible={edit} setVisible={setEdit}>
+			<Modal visible={edit} setVisible={setEdit}>
 				<IncomeEditor setEdit={setEdit} name={name}/>
-			</Editor>
+			</Modal>
 		</styled.ShowView>
 	)
 }

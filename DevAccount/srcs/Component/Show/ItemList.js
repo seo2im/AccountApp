@@ -1,11 +1,10 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 
-import Sider from '../Component/Sider'
+import { Sider } from '~/srcs/Component'
+import * as styled from '~/srcs/Styles/ShowView'
 
-import * as styled from '../Styles/ShowView'
-
-function List ({lists, onPress, date}) {
+function ItemList ({lists, onPress, date}) {
 
 	return (
 		<FlatList
@@ -25,4 +24,4 @@ function List ({lists, onPress, date}) {
 	)
 }
 
-export default List;
+export default ItemList;

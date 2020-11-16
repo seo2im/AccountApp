@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import * as storage from './Storage'
+import * as storage from '../Storage'
 
 
 function useIncome () {
