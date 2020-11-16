@@ -8,7 +8,7 @@ export const Box = styled(Basic.Box)`
 
 export const BoxTitle = styled(Basic.BigText)`
 	font-size : ${(props => props.fontSize !== undefined ? props.fontSize : "20px")};
-	margin-bottom : 10px;
+	margin-bottom : 20px;
 `
 
 export const BoxValue = styled.Text`

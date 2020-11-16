@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 
-import IncomeEditor from '~/srcs/Editor/IncomeEditor'
+import { IncomeEditor } from '~/srcs/Editor'
 import { ShowView, Modal } from '~/srcs/Component'
 
 import { Context } from '~/srcs/Context/Context'

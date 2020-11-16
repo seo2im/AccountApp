@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { FlatList } from 'react-native'
 
-import MustExpenseEditor from '~/srcs/Editor/MustExpenseEditor'
+import { MustExpenseEditor } from '~/srcs/Editor'
 import { TouchBox, Button, Modal, Sider } from '~/srcs/Component'
 import { Context } from '~/srcs/Context/Context'
 import * as styled from '~/srcs/Styles/MainView'

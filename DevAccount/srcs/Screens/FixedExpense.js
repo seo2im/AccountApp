@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 
-import FixedExpenseEditor from '~/srcs/Editor/FixedExpenseEditor'
+import { FixedExpenseEditor } from '~/srcs/Editor'
 import { ShowView, Modal } from '~/srcs/Component'
 import { Context } from '../Context/Context'
 import * as styled from '../Styles/ShowView'

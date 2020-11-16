@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 
-import AccountEditor from '~/srcs/Editor/AccountEditor'
-import { SurplusBox, Modal, MainBox, MustExpenseBox, Box } from '~/srcs/Component'
+import { AccountEditor } from '~/srcs/Editor'
+import { SurplusBox, Modal, MainBox, MustExpenseBox, Box, Button } from '~/srcs/Component'
 import { Context } from '~/srcs/Context/Context'
 import * as styled from "~/srcs/Styles/MainView"
 import { NextMonth } from '~/srcs/function/utils'
@@ -44,10 +44,8 @@ function MainView ({navigation}) {
 			<Modal visible={edit} setVisible={setEdit}>
 				<AccountEditor setEdit={setEdit}/>
 			</Modal>
-			<styled.AddButton
-				onPress={() => NextMonth({account, modAccount, surplus, initSurplus, mustExpense, initMustExpense})}>
-				<styled.ButtonText>이월</styled.ButtonText>
-			</styled.AddButton>
+			<Button title="이월" 
+			onPress={() => NextMonth({account, modAccount, surplus, initSurplus, mustExpense, initMustExpense})}/>
 		</styled.MainView>
 	)
 }

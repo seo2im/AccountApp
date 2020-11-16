@@ -1,15 +1,9 @@
 import React, {useContext} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator} from '@react-navigation/stack'
-import { Context } from '../Context/Context'
 
-import MainView from "./MainView"
-
-import MustExpense from "./MustExpense"
-import MustExpenseItem from "./MustExpenseItem"
-import Income from "./Income"
-import FixedExpense from "./FixedExpense"
-import Surplus from "./Surplus"
+import { MainView, MustExpense, MustExpenseItem, Income, FixedExpense, Surplus } from "~/srcs/Screens"
+import { Context } from '~/srcs/Context/Context'
 
 const Stack = createStackNavigator();
 

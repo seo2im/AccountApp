@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 
-import SurplusEditor from '~/srcs/Editor/SurplusEditor'
+import { SurplusEditor } from '~/srcs/Editor'
 import { ShowView, Modal } from '~/srcs/Component'
 
 import { Context } from '~/srcs/Context/Context'
