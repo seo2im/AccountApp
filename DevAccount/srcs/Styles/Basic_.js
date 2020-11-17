@@ -18,7 +18,6 @@ export const BigText = styled.Text`
 
 export const MainView = styled.View`
 	margin : 20px 0;
-
 `
 
 export const Box = styled.View`

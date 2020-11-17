@@ -32,7 +32,6 @@ const Input = styled.TextInput`
 	border-right-width : 0;
 	border-top-width : 0;
 	border-bottom-width : 2px;
-
 	width : 70%;
 ` 
 
